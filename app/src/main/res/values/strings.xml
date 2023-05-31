@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">KuToko</string>
-    <string name="title_home">Home</string>
+    <string name="title_beranda">Beranda</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Notifikasi</string>
+    <string name="title_cari">Cari</string>
+    <string name="title_riwayat">Riwayat</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

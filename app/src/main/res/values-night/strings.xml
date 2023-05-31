@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_cari">Cari</string>
+    <string name="title_riwayat">Riwayat</string>
+    <string name="title_favorite">Favorite</string>
+</resources>
