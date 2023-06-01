@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">KuToko</string>
     <string name="title_beranda">Beranda</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifikasi</string>
+    <string name="title_search">Cari UMKM</string>
+    <string name="title_profile">User Profile</string>
     <string name="title_cari">Cari</string>
     <string name="title_riwayat">Riwayat</string>
     <string name="title_favorite">Favorite</string>
+    <string name="alamat_saat_ini"><b>Alamat Saat Ini</b></string>
+    <string name="ganti_lokasi">Ganti Lokasi ?</string>
+    <string name="umkm_sekitar">UMKM Di Sekitar</string>
+    <string name="umkm_rekomendasi">Rekomendasi Untuk Kamu</string>
+    <string name="umkm_terlaris">UMKM Terlaris</string>
+    <string name="temukan_umkm">Temukan UMKM Mu Disini ....</string>
+    <string name="buka_umkm">Buka Toko UMKM ?</string>
+    <string name="toko_saya">Toko Saya</string>
+    <string name="alamat_saya">Alamat Saya</string>
+    <string name="akun_dan_keamanan">Akun &amp; Keamanan</string>
+
+    <!--dummy-->
+    <string name="dummy_address">69MX+9QC, Jl. Garboruci, Dabag, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281</string>
+    <string name="dummy_name">Dedi Yanto</string>
 </resources>
