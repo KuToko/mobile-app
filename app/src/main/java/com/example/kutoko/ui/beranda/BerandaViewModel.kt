@@ -1,10 +1,10 @@
-package com.example.kutoko.ui.home
+package com.example.kutoko.ui.beranda
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class BerandaViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
