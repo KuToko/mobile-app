@@ -16,6 +16,17 @@
     <string name="toko_saya">Toko Saya</string>
     <string name="alamat_saya">Alamat Saya</string>
     <string name="akun_dan_keamanan">Akun &amp; Keamanan</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar">Daftar</string>
+    <string name="punya_akun">Belum Punya Akun ?</string>
+    <string name="daftar_sekarang">Daftar Sekarang !!!</string>
+    <string name="alamat_email">Alamat Email</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="invalid_email">Alamat Email Invalid</string>
+    <string name="invalid_sandi">Kata Sandi Invalid \nMinimal 8 Huruf dan Tidak Ada Spasi</string>
+    <string name="kolom_kosong">Kolom Tidak Boleh Kosong</string>
+    <string name="username">Username</string>
+    <string name="nama">Nama</string>
 
     <!--dummy-->
     <string name="dummy_address">69MX+9QC, Jl. Garboruci, Dabag, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281</string>

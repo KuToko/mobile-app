@@ -119,7 +119,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_user_primary"/>
+            android:src="@drawable/ic_user_black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
