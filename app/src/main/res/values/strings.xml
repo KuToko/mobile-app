@@ -20,4 +20,13 @@
     <!--dummy-->
     <string name="dummy_address">69MX+9QC, Jl. Garboruci, Dabag, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281</string>
     <string name="dummy_name">Dedi Yanto</string>
+
+    <string name="nProduk">Nama Produk</string>
+    <string name="nToko">Nama Toko</string>
+    <string name="jarakToko">10km</string>
+    <string name="kategoriToko">Kategori Toko</string>
+    <string name="ratingToko">5.0</string>
+    <string name="jumlahRating">999</string>
+    <string name="ratingText">ratings</string>
+    <string name="retry">COBA LAGI !!</string>
 </resources>

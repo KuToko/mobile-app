@@ -1,21 +1,27 @@
 package com.example.kutoko.ui.beranda
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kutoko.adapter.LoadingStateAdapter
+import com.example.kutoko.adapter.NearbyStoreAdapter
 import com.example.kutoko.databinding.FragmentBerandaBinding
 
 class BerandaFragment : Fragment() {
 
     private var _binding: FragmentBerandaBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private lateinit var recylerView : RecyclerView
     private val binding get() = _binding!!
+    private val pageViewModel : PageViewModel by viewModels {
+        ViewModelFactory(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,16 +29,36 @@ class BerandaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val berandaViewModel =
-            ViewModelProvider(this).get(BerandaViewModel::class.java)
-
+            ViewModelProvider(this)[BerandaViewModel::class.java]
         _binding = FragmentBerandaBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        //recylerview
+        recylerView = binding.rvUmkmDisekitar
+        recylerView.layoutManager = GridLayoutManager(context,2)
+        setUserStore()
+        return binding.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUserStore() {
+        val adapter = NearbyStoreAdapter()
+        binding.rvUmkmDisekitar.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+
+        pageViewModel.store.observe(viewLifecycleOwner){
+            if (it != null) {
+                Log.d("Beranda Fragment", "Data received")
+                adapter.submitData(lifecycle,it)
+                Log.d("Beranda Fragment", "Data submitted to adapter")
+            }
+        }
     }
 }

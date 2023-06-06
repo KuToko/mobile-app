@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_columnWeight="1"
+    android:layout_marginHorizontal="0dp"
+    android:layout_marginVertical="10dp"
+    android:backgroundTint="@color/white"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="3dp"
+    card_view:cardUseCompatPadding="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_toko_terdekat"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/food"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/toko_saya"/>
+
+        <TextView
+            android:id="@+id/tv_nama_toko"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/nProduk"
+            android:textColor="@color/main"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/tv_jarak_toko"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jarakToko"
+                android:textColor="@color/main_light"
+                android:textSize="8sp"
+                tools:ignore="SmallSp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/main_light"
+                android:layout_marginHorizontal="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_kategori_toko"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kategoriToko"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/main_light"
+                android:textSize="8sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+
+                android:id="@+id/tv_rating_toko"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ratingToko"
+                android:textColor="@color/main_light"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="0dp"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_baseline_star_rate_24"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/tv_rating_toko"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.0"
+                android:contentDescription="@string/ratingToko"/>
+
+            <TextView
+                android:id="@+id/tv_total_review"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:textStyle="bold"
+                android:textSize="8sp"
+                android:text="@string/jumlahRating"
+                android:textColor="@color/main_light"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/imageView"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ratingText"
+                android:layout_marginStart="4dp"
+                android:textSize="8sp"
+                android:textColor="@color/main_light"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/tv_total_review"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+
+            <ImageButton
+                android:id="@+id/bt_favorite"
+                android:layout_width="20dp"
+                android:layout_height="21dp"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/title_favorite"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
