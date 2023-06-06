@@ -120,7 +120,19 @@ class RegisterActivity : AppCompatActivity() {
 
         })
     }
+    
+    private fun shorAlertDialog() {
 
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Register Gagal")
+        builder.setMessage("Email Sudah Terpakai \nCoba Beberapa Saat Lagi Apabila Tidak Ada Kesalahan")
+
+        builder.setNegativeButton("OK"){ dialog : DialogInterface, _: Int ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
+    
     private fun setBtnEnabled(binding: ActivityRegisterBinding){
         binding.registBtn.isEnabled = correctEmail && correctPassword
                 && binding.registUsername.text.isNotEmpty() && binding.registName.text.isNotEmpty()
