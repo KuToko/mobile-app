@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/username"
+        android:drawableStart="@drawable/ic_at"
         android:background="@drawable/bg_kotak"/>
 
     <EditText
@@ -58,6 +59,7 @@
         android:minHeight="48dp"
         android:layout_marginTop="10dp"
         android:hint="@string/nama"
+        android:drawableStart="@drawable/ic_user_black"
         android:background="@drawable/bg_kotak"/>
 
     <com.example.kutoko.ui.customview.CustomEmail

@@ -1,11 +1,19 @@
 package com.example.kutoko.ui.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
+import com.example.kutoko.MainActivity
+import com.example.kutoko.clientApi.ApiConfig
+import com.example.kutoko.data.LoginResponse
+import com.example.kutoko.data.RegisterResponse
 import com.example.kutoko.databinding.ActivityRegisterBinding
+import retrofit2.Call
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -28,6 +36,15 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.registBtn.setOnClickListener {
+            val username = binding.registUsername.text.toString()
+            val name = binding.registName.text.toString()
+            val email = binding.registEmail.text.toString()
+            val sandi = binding.registSandi.text.toString()
+
+            val bodyRegist = mapOf("username" to username, "name" to name, "email" to email, "password" to sandi)
+            register(bodyRegist)
+        }
 
         binding.registEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -73,7 +90,39 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    private fun register(bodyRegist: Map<String, String>) {
+
+        //showLoading(true)
+        val client = ApiConfig.getApiService().postRegister(bodyRegist)
+        client.enqueue(object : retrofit2.Callback<RegisterResponse>{
+            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                val responseBody = response.body()
+                if (response.isSuccessful && responseBody != null) {
+                    if (responseBody.message == "error"){
+                        shorAlertDialog()
+                    } else{
+                        val moveIntent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                        startActivity(moveIntent)
+                        finish()
+                    }
+                } else{
+                    Log.e("Login Failed", "Login onFailure: ${response.body()?.data}")
+                    shorAlertDialog()
+                }
+                //_isLoading.value = false
+            }
+
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                //_isLoading.value = false
+                Log.e("enqueue Failed", "Login onFailure: ${t.message}")
+                shorAlertDialog()
+            }
+
+        })
+    }
+
     private fun setBtnEnabled(binding: ActivityRegisterBinding){
         binding.registBtn.isEnabled = correctEmail && correctPassword
+                && binding.registUsername.text.isNotEmpty() && binding.registName.text.isNotEmpty()
     }
 }
