@@ -2,7 +2,7 @@ package com.example.kutoko.di
 
 import android.content.Context
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.database.StoreDatabase
+import com.example.kutoko.data.database.nearbyStoreDatabase.StoreDatabase
 import com.example.kutoko.data.remoteDAO.StoreRepository
 
 object Injection {

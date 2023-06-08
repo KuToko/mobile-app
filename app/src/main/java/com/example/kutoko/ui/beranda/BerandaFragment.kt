@@ -1,6 +1,8 @@
 package com.example.kutoko.ui.beranda
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kutoko.adapter.LoadingStateAdapter
 import com.example.kutoko.adapter.NearbyStoreAdapter
 import com.example.kutoko.databinding.FragmentBerandaBinding
+import com.example.kutoko.util.LocationManager
+import kotlinx.coroutines.delay
 
 class BerandaFragment : Fragment() {
 
@@ -32,10 +36,18 @@ class BerandaFragment : Fragment() {
             ViewModelProvider(this)[BerandaViewModel::class.java]
         _binding = FragmentBerandaBinding.inflate(inflater, container, false)
 
+        berandaViewModel.latitude.observe(viewLifecycleOwner){
+            LocationManager.lat = it
+        }
+
+        berandaViewModel.longitude.observe(viewLifecycleOwner) {
+            LocationManager.long = it
+        }
         //recylerview
         recylerView = binding.rvUmkmDisekitar
         recylerView.layoutManager = GridLayoutManager(context,2)
-        setUserStore()
+        setUserStoreWithDelay()
+
         return binding.root
     }
 
@@ -43,6 +55,15 @@ class BerandaFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUserStoreWithDelay() {
+        // Delay in milliseconds
+        val delayDuration = 1000L
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            setUserStore()
+        }, delayDuration)
     }
 
     private fun setUserStore() {
@@ -56,6 +77,7 @@ class BerandaFragment : Fragment() {
         pageViewModel.store.observe(viewLifecycleOwner){
             if (it != null) {
                 Log.d("Beranda Fragment", "Data received")
+
                 adapter.submitData(lifecycle,it)
                 Log.d("Beranda Fragment", "Data submitted to adapter")
             }

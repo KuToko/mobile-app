@@ -1,4 +1,4 @@
-package com.example.kutoko.data.database
+package com.example.kutoko.data.database.RemoteDatabase
 
 import androidx.room.Dao
 import androidx.room.Insert

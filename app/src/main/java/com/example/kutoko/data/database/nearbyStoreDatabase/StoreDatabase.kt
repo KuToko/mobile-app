@@ -1,9 +1,12 @@
-package com.example.kutoko.data.database
+package com.example.kutoko.data.database.nearbyStoreDatabase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.kutoko.data.database.ListStoreItem
+import com.example.kutoko.data.database.RemoteDatabase.RemoteKeys
+import com.example.kutoko.data.database.RemoteDatabase.RemoteKeysDAO
 
 
 @Database(

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1'
 }
 
 android {
@@ -81,4 +82,9 @@ dependencies {
 
     //datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //location
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
 }

@@ -1,11 +1,11 @@
-package com.example.kutoko.data.database
+package com.example.kutoko.data.database.nearbyStoreDatabase
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.kutoko.data.StoreList
+import com.example.kutoko.data.database.ListStoreItem
 
 
 @Dao

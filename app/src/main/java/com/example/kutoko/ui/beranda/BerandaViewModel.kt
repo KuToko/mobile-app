@@ -10,4 +10,16 @@ class BerandaViewModel : ViewModel() {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+    private val _latitude = MutableLiveData<Double>()
+    val latitude : LiveData<Double> = _latitude
+
+    private val _longitude = MutableLiveData<Double>()
+    val longitude : LiveData<Double> = _longitude
+
+
+    internal fun setLatLng(lat : Double, long : Double){
+        _latitude.value = lat
+        _longitude.value = long
+    }
 }

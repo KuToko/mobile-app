@@ -12,7 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import com.example.kutoko.MainActivity
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.LoginResponse
+import com.example.kutoko.data.User
+import com.example.kutoko.data.UserPreference
 import com.example.kutoko.databinding.ActivityLoginBinding
+import com.example.kutoko.ui.userLocation.FetchUserLocation
 import com.example.kutoko.util.TokenManager
 import retrofit2.Call
 import retrofit2.Response
@@ -20,9 +23,11 @@ import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var mUserPreference: UserPreference
 
     private var correctEmail = false
     private var correctPassword = false
+
 
     private val Password_Pattern = Pattern.compile("^" +
             //"(?=.*[@#$%^&+=])" +     // at least 1 special character
@@ -35,6 +40,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mUserPreference = UserPreference(this)
+
+        if (mUserPreference.getUser().token.toString().isNotEmpty()){
+            TokenManager.token = mUserPreference.getUser().token.toString()
+            startActivity(Intent(this,FetchUserLocation::class.java))
+        }
 
         binding.tvRegisterNow.setOnClickListener{
             val moveIntent = Intent(this, RegisterActivity::class.java)
@@ -102,8 +114,9 @@ class LoginActivity : AppCompatActivity() {
                     if (responseBody.message == "error"){
                         shorAlertDialog()
                     } else{
+                        saveUser(responseBody.data.email, responseBody.data.username, responseBody.data.token)
                         TokenManager.token = responseBody.data.token
-                        val moveIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                        val moveIntent = Intent(this@LoginActivity, FetchUserLocation::class.java)
                         startActivity(moveIntent)
                         finish()
                     }
@@ -119,7 +132,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("enqueue Failed", "Login onFailure: ${t.message}")
                 shorAlertDialog()
             }
-
         })
     }
 
@@ -138,4 +150,12 @@ class LoginActivity : AppCompatActivity() {
     private fun setBtnEnabled(binding: ActivityLoginBinding){
         binding.loginBtn.isEnabled = correctEmail && correctPassword
     }
+
+    private fun saveUser(userId: String, name: String, token: String) : User {
+        val userPreference = UserPreference(this)
+        val user = User(userId,name,token)
+        userPreference.setUser(user)
+        return user
+    }
+
 }

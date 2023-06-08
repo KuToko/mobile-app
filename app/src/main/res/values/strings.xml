@@ -40,4 +40,7 @@
     <string name="jumlahRating">999</string>
     <string name="ratingText">ratings</string>
     <string name="retry">COBA LAGI !!</string>
+
+
+    <string name="fetchMap">Sedang Mendapatkan Lokasi Mu !!</string>
 </resources>

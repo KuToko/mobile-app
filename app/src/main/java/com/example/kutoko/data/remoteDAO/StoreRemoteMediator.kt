@@ -8,9 +8,11 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.kutoko.clientApi.ApiService
 import com.example.kutoko.data.database.ListStoreItem
-import com.example.kutoko.data.database.RemoteKeys
-import com.example.kutoko.data.database.StoreDatabase
+import com.example.kutoko.data.database.RemoteDatabase.RemoteKeys
+import com.example.kutoko.data.database.nearbyStoreDatabase.StoreDatabase
+import com.example.kutoko.util.LocationManager
 import com.example.kutoko.util.TokenManager
+import kotlinx.coroutines.delay
 
 
 @OptIn(ExperimentalPagingApi::class)
@@ -53,7 +55,7 @@ class StoreRemoteMediator (
         }
 
         try {
-            val responseData = apiService.getStore("Bearer " + TokenManager.token,-7.775241177136506, 110.393442675452,state.config.pageSize,page).data
+            val responseData = apiService.getStore("Bearer " + TokenManager.token,LocationManager.lat, LocationManager.long, state.config.pageSize,page).data
             val dataStore = ArrayList<ListStoreItem>()
 
             for (i in responseData.indices){
@@ -65,7 +67,7 @@ class StoreRemoteMediator (
                 val store = ListStoreItem(responseData[i].id,responseData[i].name,responseData[i].google_maps_rating,responseData[i].avatar,kategori,responseData[i].distance_in_m,responseData[i].distance_in_km)
                 dataStore.add(store)
             }
-
+            delay(1000)
             val endOfPaginationReached = responseData.isEmpty()
             Log.d("ResponseData", "${responseData.size} jumlah")
             database.withTransaction {
@@ -81,6 +83,7 @@ class StoreRemoteMediator (
                 }.toList()
                 database.remoteKeysDAO().insertAll(keys)
                 database.storeRemote().addStories(dataStore)
+
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {
@@ -108,5 +111,4 @@ class StoreRemoteMediator (
             }
         }
     }
-
 }
