@@ -1,5 +1,6 @@
 package com.example.kutoko.ui.auth
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +8,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
-import com.example.kutoko.MainActivity
+import androidx.appcompat.app.AlertDialog
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.LoginResponse
 import com.example.kutoko.data.RegisterResponse
 import com.example.kutoko.databinding.ActivityRegisterBinding
 import retrofit2.Call
@@ -20,8 +20,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
-    private var correctUsername = false
-    private var correctName = false
     private var correctEmail = false
     private var correctPassword = false
 
@@ -120,7 +118,7 @@ class RegisterActivity : AppCompatActivity() {
 
         })
     }
-    
+
     private fun shorAlertDialog() {
 
         val builder = AlertDialog.Builder(this)
@@ -132,7 +130,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         builder.show()
     }
-    
+
     private fun setBtnEnabled(binding: ActivityRegisterBinding){
         binding.registBtn.isEnabled = correctEmail && correctPassword
                 && binding.registUsername.text.isNotEmpty() && binding.registName.text.isNotEmpty()

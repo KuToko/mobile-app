@@ -1,5 +1,9 @@
 package com.example.kutoko.util
 
+
+
 object TokenManager {
-    var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxOGYwNTkxLWUzYjYtNGRkMS04OTcyLWRjNGJmNDcxMzg2YyIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY4NjA0Njk4N30.x2jQOQ4StmBor2xDeDrTbM4p8LkGXLcVbimRXb_fzpE"
+
+
+    var token: String? = ""
 }
