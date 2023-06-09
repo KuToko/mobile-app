@@ -4,9 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
-@Entity(tableName = "stores")
-data class ListStoreItem (
+@Entity(tableName = "recommendation")
+data class ListRecommendationItem (
 
     @PrimaryKey
     @field:SerializedName("id")

@@ -1,4 +1,4 @@
-package com.example.kutoko.adapter
+package com.example.kutoko.adapter.adapterNearbyStore
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

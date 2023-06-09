@@ -12,16 +12,19 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="vertical"
+      android:layout_marginBottom="250dp"
       app:layout_constraintVertical_bias="0.1"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent">
+      app:layout_constraintEnd_toEndOf="parent"
+      tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:src="@drawable/logo_kutoko"/>
+        android:src="@drawable/logo_kutoko"
+        android:contentDescription="@string/toko_saya"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -49,8 +52,10 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/username"
+        android:autofillHints="name"
         android:drawableStart="@drawable/ic_at"
-        android:background="@drawable/bg_kotak"/>
+        android:background="@drawable/bg_kotak"
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/regist_name"
@@ -59,7 +64,9 @@
         android:minHeight="48dp"
         android:layout_marginTop="10dp"
         android:hint="@string/nama"
-        android:drawableStart="@drawable/ic_user_black"
+        android:autofillHints="name"
+        android:inputType="text"
+        android:drawableStart="@drawable/ic_baseline_person_24"
         android:background="@drawable/bg_kotak"/>
 
     <com.example.kutoko.ui.customview.CustomEmail
@@ -69,6 +76,7 @@
         android:minHeight="48dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_kotak"
+
         android:inputType="textEmailAddress"/>
 
     <com.example.kutoko.ui.customview.CustomPassword
@@ -83,11 +91,21 @@
     <com.example.kutoko.ui.customview.CustomButton
         android:id="@+id/regist_btn"
         android:enabled="false"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:text="@string/daftar"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
   </LinearLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>

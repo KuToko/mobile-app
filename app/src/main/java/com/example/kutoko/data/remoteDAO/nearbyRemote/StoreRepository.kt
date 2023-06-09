@@ -1,4 +1,4 @@
-package com.example.kutoko.data.remoteDAO
+package com.example.kutoko.data.remoteDAO.nearbyRemote
 
 import androidx.lifecycle.LiveData
 import androidx.paging.*

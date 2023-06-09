@@ -1,7 +1,6 @@
 package com.example.kutoko.data
 
 import android.os.Parcelable
-import com.example.kutoko.data.database.ListStoreItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -31,6 +30,10 @@ data class StoreList(
     val google_maps_rating : String?,
     @field:SerializedName("avatar")
     val avatar : String,
+    @field:SerializedName("is_voted")
+    val is_voted : Boolean,
+    @field:SerializedName("upvotes")
+    val upvotes : Int,
     @field:SerializedName("categories")
     val categories : List<StoreCategory>,
     @field:SerializedName("distance_in_m")

@@ -18,6 +18,8 @@ class BerandaViewModel : ViewModel() {
     val longitude : LiveData<Double> = _longitude
 
 
+
+
     internal fun setLatLng(lat : Double, long : Double){
         _latitude.value = lat
         _longitude.value = long

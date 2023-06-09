@@ -53,6 +53,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_alamat_sekarang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="@string/dummy_address"
@@ -63,6 +64,7 @@
                     android:layout_marginBottom="5dp"/>
 
                 <Button
+                    android:id="@+id/bt_ganti_lokasi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -89,9 +91,11 @@
                     android:layout_margin="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_rekomendasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:orientation="horizontal"
                     android:background="@color/main"/>
             </LinearLayout>
 

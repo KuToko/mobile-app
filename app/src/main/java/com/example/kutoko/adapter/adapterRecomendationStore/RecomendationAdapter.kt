@@ -1,4 +1,4 @@
-package com.example.kutoko.adapter
+package com.example.kutoko.adapter.adapterRecomendationStore
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
-import com.example.kutoko.data.database.ListStoreItem
-import com.example.kutoko.databinding.MenuItemBinding
+import com.example.kutoko.data.database.ListRecommendationItem
+import com.example.kutoko.databinding.RecomendationItemBinding
 
-class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem,NearbyStoreAdapter.MyViewHolder>(DIFF_CALLBACK) {
-
+class RecomendationAdapter : PagingDataAdapter<ListRecommendationItem,RecomendationAdapter.MyViewHolder> (
+    DIFF_CALLBACK
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = MenuItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RecomendationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -25,10 +26,11 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem,NearbyStoreAdapter.My
         }
     }
 
-    class MyViewHolder(private val binding: MenuItemBinding) :
+
+    class MyViewHolder(private val binding: RecomendationItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(data: ListStoreItem) {
+        fun bind(data: ListRecommendationItem) {
             val imageUrl = data.avatar
             val distanceinM = if (data.distance_in_m < 20) {
                 20.0
@@ -40,14 +42,10 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem,NearbyStoreAdapter.My
             binding.tvJarakToko.text = if (data.distance_in_km < 1) {
                 distanceinM.toInt().toString() + "m"
             }else{
-                data.distance_in_km.toInt().toString()
+                data.distance_in_km.toInt().toString() + "km"
             }
-
             binding.tvKategoriToko.text = data.categories
-
-            binding.tvRatingToko.text = "4.0"
-
-            binding.tvTotalReview.text = "999"
+            binding.tvTotalReview.text = data.upvotes.toString()
 
 //            itemView.setOnClickListener {
 //                val intent = Intent(itemView.context, DetailStoryActivity::class.java)
@@ -57,17 +55,17 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem,NearbyStoreAdapter.My
         }
     }
 
+
+
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoreItem>() {
-            override fun areItemsTheSame(oldItem: ListStoreItem, newItem: ListStoreItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListRecommendationItem>() {
+            override fun areItemsTheSame(oldItem: ListRecommendationItem, newItem: ListRecommendationItem): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem:ListStoreItem, newItem: ListStoreItem): Boolean {
+            override fun areContentsTheSame(oldItem: ListRecommendationItem, newItem: ListRecommendationItem): Boolean {
                 return oldItem.id == newItem.id
             }
         }
     }
-
-
 }

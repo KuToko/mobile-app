@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.RegisterResponse
@@ -33,8 +34,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        showLoading(false)
         binding.registBtn.setOnClickListener {
+            showLoading(true)
             val username = binding.registUsername.text.toString()
             val name = binding.registName.text.toString()
             val email = binding.registEmail.text.toString()
@@ -97,13 +99,16 @@ class RegisterActivity : AppCompatActivity() {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
                     if (responseBody.message == "error"){
+                        showLoading(false)
                         shorAlertDialog()
                     } else{
+                        showLoading(false)
                         val moveIntent = Intent(this@RegisterActivity, LoginActivity::class.java)
                         startActivity(moveIntent)
                         finish()
                     }
                 } else{
+                    showLoading(false)
                     Log.e("Login Failed", "Login onFailure: ${response.body()?.data}")
                     shorAlertDialog()
                 }
@@ -112,6 +117,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 //_isLoading.value = false
+                showLoading(false)
                 Log.e("enqueue Failed", "Login onFailure: ${t.message}")
                 shorAlertDialog()
             }
@@ -134,5 +140,13 @@ class RegisterActivity : AppCompatActivity() {
     private fun setBtnEnabled(binding: ActivityRegisterBinding){
         binding.registBtn.isEnabled = correctEmail && correctPassword
                 && binding.registUsername.text.isNotEmpty() && binding.registName.text.isNotEmpty()
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        if (isLoading){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }

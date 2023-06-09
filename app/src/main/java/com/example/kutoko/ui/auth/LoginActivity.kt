@@ -1,5 +1,6 @@
 package com.example.kutoko.ui.auth
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import com.example.kutoko.MainActivity
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.LoginResponse
@@ -40,12 +44,21 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        showLoading(false)
+        ActivityCompat.requestPermissions(
+            this@LoginActivity,
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
+            102
+        )
 
         mUserPreference = UserPreference(this)
-
         if (mUserPreference.getUser().token.toString().isNotEmpty()){
             TokenManager.token = mUserPreference.getUser().token.toString()
             startActivity(Intent(this,FetchUserLocation::class.java))
+            finish()
         }
 
         binding.tvRegisterNow.setOnClickListener{
@@ -54,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
+            showLoading(true)
             val email = binding.loginEmail.text.toString()
             val sandi = binding.loginSandi.text.toString()
             val bodyLogin = mapOf("email" to email, "password" to sandi)
@@ -113,14 +127,18 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful && responseBody != null) {
                     if (responseBody.message == "error"){
                         shorAlertDialog()
+                        showLoading(false)
                     } else{
+                        showLoading(false)
                         saveUser(responseBody.data.email, responseBody.data.username, responseBody.data.token)
                         TokenManager.token = responseBody.data.token
                         val moveIntent = Intent(this@LoginActivity, FetchUserLocation::class.java)
                         startActivity(moveIntent)
                         finish()
+
                     }
                 } else{
+                    showLoading(false)
                     Log.e("Login Failed", "Login onFailure: ${response.body()?.data}")
                     shorAlertDialog()
                 }
@@ -129,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 //_isLoading.value = false
+                showLoading(false)
                 Log.e("enqueue Failed", "Login onFailure: ${t.message}")
                 shorAlertDialog()
             }
@@ -156,6 +175,14 @@ class LoginActivity : AppCompatActivity() {
         val user = User(userId,name,token)
         userPreference.setUser(user)
         return user
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        if (isLoading){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
 }

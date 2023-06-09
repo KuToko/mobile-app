@@ -1,4 +1,4 @@
-package com.example.kutoko.data.database.RemoteDatabase
+package com.example.kutoko.data.database.remoteDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

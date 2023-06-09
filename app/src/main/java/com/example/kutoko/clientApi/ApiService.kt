@@ -25,10 +25,20 @@ interface ApiService {
     @GET("businesses")
     suspend fun getStore(
         @Header("Authorization") token: String?,
-        @Query("latitude") latitude: Double = -7.775241177136506,
-        @Query("longitude") longitude: Double = 110.393442675452,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
         @Query("total_row") total_row: Int,
         @Query("page") page: Int
 
     ) : StoreResponse
+
+    @GET("recommendation")
+    suspend fun getRecommendation(
+        @Header("Authorization") token: String?,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+        @Query("total_row") total_row: Int,
+        @Query("page") page: Int
+    ) : StoreResponse
+
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.kutoko.data.database.ListStoreItem
-import com.example.kutoko.data.remoteDAO.StoreRepository
+import com.example.kutoko.data.remoteDAO.nearbyRemote.StoreRepository
 import com.example.kutoko.di.Injection
 
 class PageViewModel(storeRepository: StoreRepository) : ViewModel() {
