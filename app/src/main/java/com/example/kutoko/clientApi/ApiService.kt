@@ -1,14 +1,11 @@
 package com.example.kutoko.clientApi
 
+import com.example.kutoko.data.DetailStoreResponse
 import com.example.kutoko.data.LoginResponse
 import com.example.kutoko.data.RegisterResponse
 import com.example.kutoko.data.StoreResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -31,4 +28,11 @@ interface ApiService {
         @Query("page") page: Int
 
     ) : StoreResponse
+
+    @GET("businesses/{idToko}")
+    fun getDetailStore(
+        @Header("Authorization") token: String,
+        @Path("idToko") idToko:String
+    ): Call<DetailStoreResponse>
+
 }

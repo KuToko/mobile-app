@@ -41,6 +41,12 @@
     <string name="ratingText">ratings</string>
     <string name="retry">COBA LAGI !!</string>
 
+    <string name="detailUpvote">%d UpVote</string>
 
     <string name="fetchMap">Sedang Mendapatkan Lokasi Mu !!</string>
+    <string name="tab_text_1">Produk</string>
+    <string name="tab_text_2">Informasi</string>
+    <string name="lokasi_penjual">Lokasi Penjual</string>
+    <string name="jam_operasional">Jam Operasional</string>
+
 </resources>
