@@ -52,6 +52,7 @@ class FetchUserLocation : AppCompatActivity(){
             } else {
                 berandaViewModel.setLatLng(lat, long)
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
 
         },400)

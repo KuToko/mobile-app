@@ -48,5 +48,6 @@
     <string name="tab_text_2">Informasi</string>
     <string name="lokasi_penjual">Lokasi Penjual</string>
     <string name="jam_operasional">Jam Operasional</string>
+    <string name="logout">Logout</string>
 
 </resources>
