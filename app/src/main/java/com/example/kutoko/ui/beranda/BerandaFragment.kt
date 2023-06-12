@@ -67,7 +67,7 @@ class BerandaFragment : Fragment() {
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)
         setUserStoreWithDelay()
-
+        Toast.makeText(requireActivity(),"${TokenManager.token}",Toast.LENGTH_LONG).show()
         binding.btGantiLokasi.setOnClickListener {
             startActivity(Intent(requireActivity(),LocationList::class.java))
             requireActivity().finish()

@@ -25,6 +25,23 @@
                 android:value="" />
         </activity>
 
+
+        <activity
+            android:name=".ui.userLocation.AddLocation"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".ui.userLocation.LocationList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDy_mPtSZAvAl3yV_JcqqW1j7-GP0BqkrY" />
