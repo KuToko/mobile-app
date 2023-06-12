@@ -18,21 +18,7 @@
         android:theme="@style/Theme.KuToko"
         tools:targetApi="31">
         <activity
-            android:name=".ui.userLocation.LocationList"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.userLocation.AddLocation"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.favorite.FavoriteActivity"
+            android:name=".ui.detailstore.DetailStoreActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

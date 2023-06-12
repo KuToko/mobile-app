@@ -38,15 +38,23 @@
     <string name="kategoriToko">Kategori Toko</string>
     <string name="ratingToko">5.0</string>
     <string name="jumlahRating">999</string>
-    <string name="ratingText">LIKES</string>
+    <string name="ratingText">ratings</string>
     <string name="retry">COBA LAGI !!</string>
 
+    <string name="detailUpvote">%d UpVote</string>
 
     <string name="fetchMap">Sedang Mendapatkan Lokasi Mu !!</string>
+    <string name="tab_text_1">Produk</string>
+    <string name="tab_text_2">Informasi</string>
+    <string name="lokasi_penjual">Lokasi Penjual</string>
+    <string name="jam_operasional">Jam Operasional</string>
+    <string name="logout">Logout</string>
+
     <string name="lokasi_saatini">Lokasi Saat Ini</string>
     <string name="detailAddress">Detail</string>
     <string name="lokasi_lain">Lokasi Lain</string>
     <string name="tambah_lokasi">Tambah Lokasi</string>
     <string name="jadikan_utama">Jadikan Utama</string>
     <string name="addLocation">Masukan Lokasi Ini</string>
+
 </resources>

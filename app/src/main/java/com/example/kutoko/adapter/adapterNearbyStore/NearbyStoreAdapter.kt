@@ -1,6 +1,7 @@
 package com.example.kutoko.adapter.adapterNearbyStore
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kutoko.R
 import com.example.kutoko.data.database.ListStoreItem
 import com.example.kutoko.databinding.MenuItemBinding
+import com.example.kutoko.ui.detailstore.DetailStoreActivity
 
 class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.MyViewHolder>(
     DIFF_CALLBACK
@@ -49,11 +51,11 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.M
             binding.tvTotalReview.text = data.upvotes.toString()
 
 
-//            itemView.setOnClickListener {
-//                val intent = Intent(itemView.context, DetailStoryActivity::class.java)
-//                intent.putExtra(DetailStoryActivity.USER_STORY, data)
-//                itemView.context.startActivity(intent)
-//            }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailStoreActivity::class.java)
+                intent.putExtra("idToko", data.id )
+                itemView.context.startActivity(intent)
+            }
         }
     }
 

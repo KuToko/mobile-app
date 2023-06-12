@@ -73,7 +73,7 @@ class AddLocation : AppCompatActivity(), OnMapReadyCallback {
         val address = getAddress(LatLng(curLat,curLon))
         if (address != null){
             val locationUser = LocationUser(0,curLat,curLon,address,false)
-            Toast.makeText(this@AddLocation,"${locationUser.address}",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@AddLocation, locationUser.address,Toast.LENGTH_LONG).show()
             mainLocationViewModel.insertLocation(locationUser)
             val builder = AlertDialog.Builder(this@AddLocation)
             builder.setTitle("Location Success to Add !!")
