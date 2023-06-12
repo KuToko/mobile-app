@@ -90,6 +90,7 @@ class RecomendationRemoteMediator (
                 }.toList()
                 database.recomendationRemoteKeysDAO().insertAll(keys)
                 database.recomendationRemote().addRecomendation(dataStore)
+
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {

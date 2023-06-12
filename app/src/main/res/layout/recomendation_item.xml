@@ -119,18 +119,18 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SmallSp" />
 
-            <ImageButton
-                android:id="@+id/bt_favorite"
-                android:layout_width="20dp"
-                android:layout_height="21dp"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/title_favorite"
-                android:src="@drawable/ic_baseline_favorite_border_24"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="0.0" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/bt_favorite"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="21dp"-->
+<!--                android:layout_marginEnd="4dp"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:contentDescription="@string/title_favorite"-->
+<!--                android:src="@drawable/ic_baseline_favorite_border_24"-->
+<!--                card_view:layout_constraintBottom_toBottomOf="parent"-->
+<!--                card_view:layout_constraintEnd_toEndOf="parent"-->
+<!--                card_view:layout_constraintTop_toTopOf="parent"-->
+<!--                card_view:layout_constraintVertical_bias="0.0" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,9 @@ class BerandaViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
+    private val _error = MutableLiveData<Boolean>()
+    val error : LiveData<Boolean> = _error
+
     private val _latitude = MutableLiveData<Double>()
     val latitude : LiveData<Double> = _latitude
 
@@ -24,4 +27,5 @@ class BerandaViewModel : ViewModel() {
         _latitude.value = lat
         _longitude.value = long
     }
+
 }

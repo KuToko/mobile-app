@@ -6,11 +6,27 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
+data class Favorite(
+    var Id: String,
+    var name : String,
+    var upvotes : String,
+    var avatar : String,
+    var categories : String
+) : Parcelable
+
+@Parcelize
 data class User(
     var userId: String? = null,
     var name: String? = null,
     var token: String? = null
 ) : Parcelable
+
+data class Location(
+    var lat: Double,
+    var lon: Double,
+    var address: String,
+    var isUsed: Boolean
+)
 
 data class StoreResponse(
     @field:SerializedName("error")

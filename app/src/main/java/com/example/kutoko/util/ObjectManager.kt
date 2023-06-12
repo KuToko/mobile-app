@@ -1,5 +1,7 @@
 package com.example.kutoko.util
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 
 object TokenManager {
@@ -12,3 +14,5 @@ object LocationManager {
     var addressLocation: String? = ""
     var isGranted : Boolean = false
 }
+
+

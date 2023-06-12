@@ -37,7 +37,7 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.M
             }else{
                 data.distance_in_m
             }
-            Glide.with(itemView.context).load(imageUrl).placeholder(R.drawable.ic_baseline_image_24).into(binding.ivTokoTerdekat)
+            Glide.with(itemView.context).load(imageUrl).placeholder(R.drawable.ic_baseline_image_24).timeout(30_000).into(binding.ivTokoTerdekat)
             binding.tvNamaToko.text = data.name
             binding.tvJarakToko.text = if (data.distance_in_km < 1) {
                 distanceinM.toInt().toString() + "m"
@@ -47,6 +47,7 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.M
 
             binding.tvKategoriToko.text = data.categories
             binding.tvTotalReview.text = data.upvotes.toString()
+
 
 //            itemView.setOnClickListener {
 //                val intent = Intent(itemView.context, DetailStoryActivity::class.java)

@@ -43,4 +43,10 @@
 
 
     <string name="fetchMap">Sedang Mendapatkan Lokasi Mu !!</string>
+    <string name="lokasi_saatini">Lokasi Saat Ini</string>
+    <string name="detailAddress">Detail</string>
+    <string name="lokasi_lain">Lokasi Lain</string>
+    <string name="tambah_lokasi">Tambah Lokasi</string>
+    <string name="jadikan_utama">Jadikan Utama</string>
+    <string name="addLocation">Masukan Lokasi Ini</string>
 </resources>

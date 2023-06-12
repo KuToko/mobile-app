@@ -1,6 +1,7 @@
 package com.example.kutoko.data.remoteDAO.nearbyRemote
 
 import android.util.Log
+import android.widget.Toast
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -57,7 +58,7 @@ class StoreRemoteMediator (
         try {
             val responseData = apiService.getStore("Bearer " + TokenManager.token,LocationManager.lat, LocationManager.long, state.config.pageSize,page).data
             val dataStore = ArrayList<ListStoreItem>()
-
+            Log.d("Ini coba test lokasi", "${LocationManager.long}, ${LocationManager.addressLocation}")
             for (i in responseData.indices){
                 var kategori = ""
 
@@ -90,6 +91,8 @@ class StoreRemoteMediator (
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {
             Log.d("ResponseData di toko terdekat", "gagal ${exception.message}")
+            database.remoteKeysDAO().deleteRemoteKeys()
+            database.storeRemote().deleteAll()
             return MediatorResult.Error(exception)
         }
     }
