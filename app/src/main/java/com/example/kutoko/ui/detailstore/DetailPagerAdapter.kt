@@ -22,7 +22,7 @@ class DetailPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(act
         }
 
         fragment?.arguments = Bundle().apply {
-            putString("userId", idToko)
+            putString("idToko", idToko)
         }
 
         return fragment as Fragment

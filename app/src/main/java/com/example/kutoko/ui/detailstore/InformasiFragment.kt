@@ -18,7 +18,7 @@ class InformasiFragment : Fragment() {
     private var _binding: FragmentInformasiBinding? = null
     private val binding get() = _binding!!
 
-    private var param1: String? = null
+    private var idToko: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +32,11 @@ class InformasiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            param1 = it.getString("userId")
+            idToko = it.getString("idToko")
         }
 
         val token = TokenManager.token
-        getDetailtoko(token.toString(), param1.toString())
+        getDetailtoko(token.toString(), idToko.toString())
     }
 
     private fun getDetailtoko(token: String, idToko: String) {
@@ -47,6 +47,7 @@ class InformasiFragment : Fragment() {
                     setDetailInformasi(response.body())
                 } else {
                     Log.e("Informasi Toko", "onResponseFailure Token : ${token}")
+                    Log.e("Informasi Toko", "onResponseFailure idToko : ${idToko}")
                     Log.e("Informasi Toko", "onResponseFailure Response : ${response.raw()}")
                 }
             }
