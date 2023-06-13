@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
+import com.example.kutoko.data.Favorite
 import com.example.kutoko.data.database.ListStoreItem
 import com.example.kutoko.databinding.MenuItemBinding
 import com.example.kutoko.ui.detailstore.DetailStoreActivity
@@ -51,9 +52,11 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.M
             binding.tvTotalReview.text = data.upvotes.toString()
 
 
+
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailStoreActivity::class.java)
                 intent.putExtra("idToko", data.id )
+                intent.putExtra(DetailStoreActivity.STORE_PROFILE,Favorite(data.id,data.name,data.upvotes,data.avatar,data.categories))
                 itemView.context.startActivity(intent)
             }
         }

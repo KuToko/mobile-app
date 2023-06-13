@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+            ViewModelProvider(this)[ProfileViewModel::class.java]
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
         mUserPreference = UserPreference(requireContext())
 
         binding.logout.setOnClickListener{
-            val builder = AlertDialog.Builder(this)
+            val builder = AlertDialog.Builder(requireActivity())
             builder.setTitle("Logout")
             builder.setMessage("Are you sure you want to logout?")
             builder.setPositiveButton("OK") { _, _ ->
@@ -51,6 +51,8 @@ class ProfileFragment : Fragment() {
             val dialog = builder.create()
             dialog.show()
         }
+
+
 
 
         return root

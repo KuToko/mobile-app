@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
 data class Favorite(
     var Id: String,
     var name : String,
-    var upvotes : String,
+    var upvotes : Int,
     var avatar : String,
-    var categories : String
+    var categories : String?
 ) : Parcelable
 
 @Parcelize

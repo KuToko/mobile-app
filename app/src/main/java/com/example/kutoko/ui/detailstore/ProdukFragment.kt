@@ -29,7 +29,7 @@ class ProdukFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProdukBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
@@ -52,7 +52,7 @@ class ProdukFragment : Fragment() {
     }
 
     private fun getListProduct(token: String, idToko: String) {
-        val detailClient = ApiConfig.getApiService().getListProduct("Bearer ${token}", idToko)
+        val detailClient = ApiConfig.getApiService().getListProduct("Bearer $token", idToko)
         detailClient.enqueue(object : retrofit2.Callback<ListProductResponse> {
             override fun onResponse(call: Call<ListProductResponse>, response: Response<ListProductResponse>) {
                 if (response.isSuccessful && response.body() != null) {
@@ -61,18 +61,18 @@ class ProdukFragment : Fragment() {
                         val adapter = ListProductAdapter(listProduct)
                         binding.rvProduk.adapter = adapter
                         Log.d("List Product", "Size Product : ${listProduct.size}")
-                        Log.d("List Product", "idToko : ${idToko}")
+                        Log.d("List Product", "idToko : $idToko")
                     }else{
                         binding.rvProduk.isVisible = false
                         binding.tvProdukKosong.isVisible = true
                         Log.e("List Product", "Size Product : ${listProduct?.size}")
-                        Log.e("List Product", "idToko : ${idToko}")
+                        Log.e("List Product", "idToko : $idToko")
                     }
                 } else {
                     binding.rvProduk.isVisible = false
                     binding.tvProdukKosong.isVisible = true
-                    Log.e("List Product", "onResponseFailure Token : ${token}")
-                    Log.e("List Product", "onResponseFailure idToko : ${idToko}")
+                    Log.e("List Product", "onResponseFailure Token : $token")
+                    Log.e("List Product", "onResponseFailure idToko : $idToko")
                     Log.e("List Product", "onResponseFailure Response : ${response.raw()}")
                 }
             }

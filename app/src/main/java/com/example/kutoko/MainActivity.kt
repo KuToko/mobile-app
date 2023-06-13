@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_beranda, R.id.navigation_cari, R.id.navigation_profile
+                R.id.navigation_beranda, R.id.navigation_cari, R.id.navigation_favorite, R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -43,9 +43,8 @@ class MainActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
                 if (currentFragment is BerandaFragment) {
-                    finishAffinity() // Close all activities and exit the app
+                    finishAffinity()
                 } else {
-                    // If the current fragment is not BerandaFragment, let the default back button behavior handle it
                     isEnabled = false
                     onBackPressed()
                 }

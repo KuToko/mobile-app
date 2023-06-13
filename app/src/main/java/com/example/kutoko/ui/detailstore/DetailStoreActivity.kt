@@ -3,13 +3,21 @@ package com.example.kutoko.ui.detailstore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.DetailStoreResponse
+import com.example.kutoko.data.Favorite
+import com.example.kutoko.data.database.favoriteDatabase.ListFavoriteItem
 import com.example.kutoko.databinding.ActivityDetailStoreBinding
+import com.example.kutoko.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.example.kutoko.ui.favorite.viewmodel.MainFavoriteViewModel
+import com.example.kutoko.util.FavoriteManager
 import com.example.kutoko.util.TokenManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,6 +27,8 @@ import retrofit2.Response
 class DetailStoreActivity : AppCompatActivity() {
 
     private lateinit var binding :ActivityDetailStoreBinding
+    private lateinit var mainFavoriteViewModel: MainFavoriteViewModel
+    private var favoriteItems: List<ListFavoriteItem> = emptyList()
 
     companion object {
         @StringRes
@@ -26,6 +36,8 @@ class DetailStoreActivity : AppCompatActivity() {
             R.string.tab_text_1,
             R.string.tab_text_2
         )
+
+        const val STORE_PROFILE = "STORE_PROFILE"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +48,9 @@ class DetailStoreActivity : AppCompatActivity() {
 
         val token = TokenManager.token.toString()
         val idToko = intent.getStringExtra("idToko").toString()
+        mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
 
+        Toast.makeText(this,"${binding.btAddFavorite.tag}",Toast.LENGTH_SHORT).show()
 
         val detailPagerAdapter = DetailPagerAdapter(this)
         detailPagerAdapter.idToko = idToko
@@ -51,16 +65,67 @@ class DetailStoreActivity : AppCompatActivity() {
 
         getDetailtoko(token, idToko)
 
+        val store = intent.getParcelableExtra<Favorite>(STORE_PROFILE)
+
+        if (store != null) {
+            mainFavoriteViewModel.getAllFavorite().observe(this) {
+                if (it != null) {
+                    checkFavorite(it,store.Id)
+                }
+            }
+        }
+
+        binding.btAddFavorite.setOnClickListener {
+            Toast.makeText(this,"coba 1",Toast.LENGTH_SHORT).show()
+
+
+            if (store != null) {
+                val favorite = ListFavoriteItem(0,store.Id,store.name,store.avatar,store.upvotes,store.categories)
+
+                if (!FavoriteManager.isAdded) {
+                    Toast.makeText(this,"add",Toast.LENGTH_SHORT).show()
+                    binding.btAddFavorite.tag = "favorite_add"
+                    mainFavoriteViewModel.insertFavorite(favorite)
+                    binding.btAddFavorite.setImageResource(R.drawable.solidheart)
+                }else{
+                    Toast.makeText(this,"del",Toast.LENGTH_SHORT).show()
+                    mainFavoriteViewModel.deleteFavorite(store.Id)
+                    binding.btAddFavorite.setImageResource(R.drawable.stripeheart)
+                }
+            }
+
+        }
+
     }
 
+    private fun obtainMainViewModel(activity: AppCompatActivity): MainFavoriteViewModel {
+        val factory = FavoriteViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity,factory)[MainFavoriteViewModel::class.java]
+
+    }
+
+    private fun checkFavorite(listFavorite: List<ListFavoriteItem>,idStore : String) {
+        val containStore = listFavorite.any { it.id?.contains(idStore, ignoreCase = true) ?: false }
+
+        if (containStore) {
+            binding.btAddFavorite.setImageResource(R.drawable.solidheart)
+            FavoriteManager.isAdded = true
+        } else {
+            binding.btAddFavorite.setImageResource(R.drawable.stripeheart)
+            FavoriteManager.isAdded = false
+        }
+
+    }
+
+
     private fun getDetailtoko(token: String, idToko: String) {
-        val detailClient = ApiConfig.getApiService().getDetailStore("Bearer ${token}", idToko)
+        val detailClient = ApiConfig.getApiService().getDetailStore("Bearer $token", idToko)
         detailClient.enqueue(object : retrofit2.Callback<DetailStoreResponse> {
             override fun onResponse(call: Call<DetailStoreResponse>, response: Response<DetailStoreResponse>) {
                 if (response.isSuccessful && response.body() != null) {
                     setDetailToko(response.body())
                 } else {
-                    Log.e("Detail Toko", "onResponseFailure Token : ${token}")
+                    Log.e("Detail Toko", "onResponseFailure Token : $token")
                     Log.e("Detail Toko", "onResponseFailure Response : ${response.raw()}")
                 }
             }
@@ -78,9 +143,10 @@ class DetailStoreActivity : AppCompatActivity() {
             .load(it?.data?.avatar)
             .placeholder(R.drawable.ic_baseline_image_24)
             .into(binding.ivDetailImg)
-
         binding.tvDetailNama.text = it?.data?.businessName
         binding.detailUpvote.text = String.format(getString(R.string.detailUpvote), it?.data?.upvotes)
+
     }
+
 
 }

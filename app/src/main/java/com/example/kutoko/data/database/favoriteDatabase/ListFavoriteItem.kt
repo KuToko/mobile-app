@@ -10,29 +10,24 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "userFavorite")
 @Parcelize
 data class ListFavoriteItem (
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "idStore")
+    var idStore: Int = 0,
+
     @ColumnInfo(name = "id")
-    var id: String,
+    var id: String?,
 
     @ColumnInfo(name = "name")
-    var name: String,
+    var name: String?,
 
     @ColumnInfo(name = "avatar")
-    val avatar : String,
+    val avatar : String?,
 
-//    @ColumnInfo(name = "is_voted")
-//    val is_voted : Boolean,
-//
     @ColumnInfo(name = "upvotes")
-    val upvotes : Int,
+    val upvotes : Int?,
 
     @ColumnInfo(name = "categories")
     val categories : String? = null,
-
-//    @ColumnInfo(name = "distance_in_m")
-//    val distance_in_m : Double,
-//
-//    @ColumnInfo(name = "distance_in_km")
-//    val distance_in_km: Double
 
 ) : Parcelable

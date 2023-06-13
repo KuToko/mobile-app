@@ -1,11 +1,13 @@
 package com.example.kutoko.adapter.adapterFavorite
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.data.Favorite
 import com.example.kutoko.databinding.FavoriteItemBinding
+import com.example.kutoko.ui.detailstore.DetailStoreActivity
 
 class FavoriteAdapter(private val listFavorite: List<Favorite>) : RecyclerView.Adapter<FavoriteAdapter.ListViewHolder>() {
 
@@ -21,6 +23,13 @@ class FavoriteAdapter(private val listFavorite: List<Favorite>) : RecyclerView.A
 
         holder.binding.tvNamaToko.text = favoriteItem.name
         holder.binding.tvKategoriToko.text = favoriteItem.categories
+
+        holder.binding.root.setOnClickListener{
+            val intent = Intent(holder.binding.root.context, DetailStoreActivity::class.java)
+            intent.putExtra("idToko", favoriteItem.Id )
+            intent.putExtra(DetailStoreActivity.STORE_PROFILE,Favorite(favoriteItem.Id,favoriteItem.name,favoriteItem.upvotes,favoriteItem.avatar,favoriteItem.categories))
+            holder.binding.root.context.startActivity(intent)
+        }
 
     }
 

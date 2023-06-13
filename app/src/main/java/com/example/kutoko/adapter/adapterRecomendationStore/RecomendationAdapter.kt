@@ -1,6 +1,7 @@
 package com.example.kutoko.adapter.adapterRecomendationStore
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -8,8 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
+import com.example.kutoko.data.Favorite
 import com.example.kutoko.data.database.ListRecommendationItem
 import com.example.kutoko.databinding.RecomendationItemBinding
+import com.example.kutoko.ui.detailstore.DetailStoreActivity
 
 class RecomendationAdapter : PagingDataAdapter<ListRecommendationItem,RecomendationAdapter.MyViewHolder> (
     DIFF_CALLBACK
@@ -47,11 +50,14 @@ class RecomendationAdapter : PagingDataAdapter<ListRecommendationItem,Recomendat
             binding.tvKategoriToko.text = data.categories
             binding.tvTotalReview.text = data.upvotes.toString()
 
-//            itemView.setOnClickListener {
-//                val intent = Intent(itemView.context, DetailStoryActivity::class.java)
-//                intent.putExtra(DetailStoryActivity.USER_STORY, data)
-//                itemView.context.startActivity(intent)
-//            }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailStoreActivity::class.java)
+                intent.putExtra("idToko", data.id )
+                intent.putExtra(DetailStoreActivity.STORE_PROFILE,
+                    Favorite(data.id,data.name,data.upvotes,data.avatar,data.categories)
+                )
+                itemView.context.startActivity(intent)
+            }
         }
     }
 

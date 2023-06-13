@@ -59,11 +59,7 @@ class BerandaFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
         layoutManager.reverseLayout = false
         recomendRecylerView.layoutManager = layoutManager
-        recomendRecylerView.post {
-            recomendRecylerView.scrollToPosition(0)
-        }
         setUserRecomendationWithDelay()
-
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)
         setUserStoreWithDelay()
@@ -72,9 +68,6 @@ class BerandaFragment : Fragment() {
             startActivity(Intent(requireActivity(),LocationList::class.java))
             requireActivity().finish()
         }
-
-
-
 
         return binding.root
     }
@@ -88,37 +81,21 @@ class BerandaFragment : Fragment() {
 
 
     private fun setUserStoreWithDelay() {
-        val delayDuration = 1000L
+        val delayDuration = 200L
 
         lifecycleScope.launch {
             delay(delayDuration)
             setUserStore()
-            try {
-                ApiConfig.getApiService().getStore(TokenManager.token,LocationManager.lat,LocationManager.long,1,1)
-
-            }catch (e: Exception){
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireActivity(), "An error occurred: ${e.message} : ", Toast.LENGTH_LONG).show()
-                }
-            }
         }
 
     }
 
     private fun setUserRecomendationWithDelay() {
-        val delayDuration = 500L
+        val delayDuration = 200L
 
         lifecycleScope.launch {
             delay(delayDuration)
             setUserRecomendation()
-            try {
-                ApiConfig.getApiService().getRecommendation(TokenManager.token,LocationManager.lat,LocationManager.long,1,1)
-
-            }catch (e: Exception){
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireActivity(), "An error occurred: ${e.message} : ", Toast.LENGTH_LONG).show()
-                }
-            }
         }
 
     }
@@ -133,6 +110,9 @@ class BerandaFragment : Fragment() {
 
         recomendationPageViewModel.recomendStore.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle,it)
+            recomendRecylerView.post {
+                recomendRecylerView.scrollToPosition(0)
+            }
         }
 
     }

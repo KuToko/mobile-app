@@ -15,4 +15,8 @@ object LocationManager {
     var isGranted : Boolean = false
 }
 
+object FavoriteManager {
+    var isAdded: Boolean = false
+}
+
 

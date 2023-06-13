@@ -57,5 +57,6 @@
     <string name="jadikan_utama">Jadikan Utama</string>
     <string name="addLocation">Masukan Lokasi Ini</string>
     <string name="data_produk_kosong">Data Produk Kosong</string>
+    <string name="favorite_click">Button Favorite Clicked</string>
 
 </resources>

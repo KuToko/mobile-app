@@ -127,7 +127,6 @@ class AddLocation : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setOnMyLocationButtonClickListener {
             updateCurrentLocation()
-            Toast.makeText(this@AddLocation,"Lokasi Lat $curLat & Lokasi Lon $curLon",Toast.LENGTH_LONG).show()
             true
         }
 
