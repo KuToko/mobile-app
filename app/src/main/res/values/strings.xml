@@ -56,5 +56,6 @@
     <string name="tambah_lokasi">Tambah Lokasi</string>
     <string name="jadikan_utama">Jadikan Utama</string>
     <string name="addLocation">Masukan Lokasi Ini</string>
+    <string name="data_produk_kosong">Data Produk Kosong</string>
 
 </resources>

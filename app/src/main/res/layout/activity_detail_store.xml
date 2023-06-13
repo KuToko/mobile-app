@@ -26,7 +26,6 @@
         android:layout_marginTop="5dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         tools:text="Soto Ayam Pak Manto"/>
 
     <TextView

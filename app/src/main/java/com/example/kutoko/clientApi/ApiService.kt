@@ -1,9 +1,6 @@
 package com.example.kutoko.clientApi
 
-import com.example.kutoko.data.DetailStoreResponse
-import com.example.kutoko.data.LoginResponse
-import com.example.kutoko.data.RegisterResponse
-import com.example.kutoko.data.StoreResponse
+import com.example.kutoko.data.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -44,4 +41,9 @@ interface ApiService {
         @Path("idToko") idToko:String
     ): Call<DetailStoreResponse>
 
+    @GET("products")
+    fun getListProduct(
+        @Header("Authorization") token: String,
+        @Query("business_id") q: String
+    ) : Call<ListProductResponse>
 }

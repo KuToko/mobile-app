@@ -108,8 +108,6 @@ class BerandaFragment : Fragment() {
     private fun setUserRecomendationWithDelay() {
         val delayDuration = 500L
 
-
-
         lifecycleScope.launch {
             delay(delayDuration)
             setUserRecomendation()

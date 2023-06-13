@@ -9,4 +9,14 @@
         android:id="@+id/rv_produk"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_produk_kosong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:text="@string/data_produk_kosong"/>
 </FrameLayout>
