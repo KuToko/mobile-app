@@ -91,6 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="10dp"
+                    android:paddingBottom="70dp"
                     tools:listitem="@layout/my_product_item"/>
             </LinearLayout>
 

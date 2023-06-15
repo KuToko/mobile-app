@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.kutoko.MainActivity
+import com.example.kutoko.R
+import com.example.kutoko.data.User
 import com.example.kutoko.data.UserPreference
 import com.example.kutoko.databinding.FragmentProfileBinding
 import com.example.kutoko.ui.auth.LoginActivity
@@ -22,6 +25,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
     private lateinit var mUserPreference: UserPreference
+    private lateinit var user : User
 
     private val binding get() = _binding!!
 
@@ -39,6 +43,11 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
         mUserPreference = UserPreference(requireContext())
+        user = mUserPreference.getUser()
+
+        binding.tvProfileUser.text = user.name
+        Glide.with(requireActivity()).load(user.avatar).placeholder(R.drawable.ic_baseline_image_24).into(binding.ivProfileUser)
+
 
         binding.logout.setOnClickListener{
             val builder = AlertDialog.Builder(requireActivity())

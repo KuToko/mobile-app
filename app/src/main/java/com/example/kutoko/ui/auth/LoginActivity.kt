@@ -134,7 +134,8 @@ class LoginActivity : AppCompatActivity() {
                         showLoading(false)
                     } else{
                         showLoading(false)
-                        saveUser(responseBody.data.email, responseBody.data.username, responseBody.data.token)
+
+                        saveUser(responseBody.data.email, responseBody.data.username, responseBody.data.token,responseBody.data.avatar )
                         TokenManager.token = responseBody.data.token
                         val moveIntent = Intent(this@LoginActivity, FetchUserLocation::class.java)
                         startActivity(moveIntent)
@@ -174,9 +175,9 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.isEnabled = correctEmail && correctPassword
     }
 
-    private fun saveUser(userId: String, name: String, token: String) : User {
+    private fun saveUser(userId: String, name: String, token: String, avatar: String) : User {
         val userPreference = UserPreference(this)
-        val user = User(userId,name,token)
+        val user = User(userId,name,token,avatar)
         userPreference.setUser(user)
         return user
     }

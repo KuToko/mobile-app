@@ -62,5 +62,9 @@ data class DataItem(
 
 data class UploadProductResponse(
 	@field:SerializedName("message")
-	val message: String
+	val message: String,
+	@field:SerializedName("data")
+	val data: List<DataItem>
 )
+
+

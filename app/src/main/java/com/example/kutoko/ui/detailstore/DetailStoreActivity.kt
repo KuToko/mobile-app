@@ -3,6 +3,7 @@ package com.example.kutoko.ui.detailstore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,8 @@ import com.example.kutoko.adapter.adapterSimiliar.SimiliarAdapter
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.apiResponse.DetailStoreResponse
 import com.example.kutoko.data.Favorite
+import com.example.kutoko.data.apiResponse.DeleteVotesResponse
+import com.example.kutoko.data.apiResponse.PostVotesResponse
 import com.example.kutoko.data.apiResponse.SimiliarBusinessResponse
 import com.example.kutoko.data.database.favoriteDatabase.ListFavoriteItem
 import com.example.kutoko.databinding.ActivityDetailStoreBinding
@@ -31,6 +34,7 @@ class DetailStoreActivity : AppCompatActivity() {
 
     private lateinit var binding :ActivityDetailStoreBinding
     private lateinit var mainFavoriteViewModel: MainFavoriteViewModel
+    private lateinit var detailStoryViewModel : DetailStoreViewModel
 
     companion object {
         @StringRes
@@ -55,7 +59,10 @@ class DetailStoreActivity : AppCompatActivity() {
 
         title = "Detail UMKM"
 
+        detailStoryViewModel = ViewModelProvider(this@DetailStoreActivity)[DetailStoreViewModel::class.java]
         mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
+
+        detailStoryViewModel.getVotes(token)
         val detailPagerAdapter = DetailPagerAdapter(this)
         detailPagerAdapter.idToko = idToko
         //detailPagerAdapter.username =
@@ -65,14 +72,19 @@ class DetailStoreActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
-
         getDetailtoko(token, idToko)
-
-
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvSimiliarBusiness.layoutManager = layoutManager
-
         getSimiliar(token, idToko, lat, long)
+
+        detailStoryViewModel.listVotes.observe(this){
+            val contain = it.any { idStore -> idStore.business_id == idToko }
+            if (contain){
+                binding.btUpvote.setImageResource(R.drawable.ic_baseline_thumb_up_24)
+            }else{
+                binding.btUpvote.setImageResource(R.drawable.ic_baseline_thumb_up_off_alt_24)
+            }
+        }
 
         @Suppress("DEPRECATION")
         val store = intent.getParcelableExtra<Favorite>(STORE_PROFILE)
@@ -98,6 +110,18 @@ class DetailStoreActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+        binding.btUpvote.setOnClickListener {
+            detailStoryViewModel.listVotes.observe(this){
+                val contain = it.any { idStore -> idStore.business_id == idToko }
+                if (contain){
+                    deleteVotes(idToko)
+                }else{
+                    addVotes()
+                }
+
+            }
         }
     }
 
@@ -179,6 +203,57 @@ class DetailStoreActivity : AppCompatActivity() {
         binding.tvDetailNama.text = it?.data?.businessName
         binding.detailUpvote.text = String.format(getString(R.string.detailUpvote), it?.data?.upvotes)
 
+    }
+
+
+    private fun deleteVotes(idStore: String){
+        val client = ApiConfig.getApiService().deleteVotes(token = TokenManager.token, idStore = idStore)
+        client.enqueue(object : retrofit2.Callback<DeleteVotesResponse>{
+            override fun onResponse(
+                call: Call<DeleteVotesResponse>,
+                response: Response<DeleteVotesResponse>
+            ) {
+                val responseBody = response.body()
+                if (response.isSuccessful && responseBody != null){
+                    if (!responseBody.error){
+                        binding.btUpvote.setImageResource(R.drawable.ic_baseline_thumb_up_off_alt_24)
+                    }else{
+                        Toast.makeText(this@DetailStoreActivity,"Gagal Delete ${response.code()}",Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(this@DetailStoreActivity,"Gagal Delete ${response.code()}",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<DeleteVotesResponse>, t: Throwable) {
+                Toast.makeText(this@DetailStoreActivity,"Gagal Delete ${t.message}",Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+    private fun addVotes(){
+        val client = ApiConfig.getApiService().postVotes(TokenManager.token)
+        client.enqueue(object : retrofit2.Callback<PostVotesResponse>{
+            override fun onResponse(
+                call: Call<PostVotesResponse>,
+                response: Response<PostVotesResponse>
+            ) {
+                val responseBody = response.body()
+                if(response.isSuccessful && responseBody != null){
+                    if (!responseBody.error){
+                        binding.btUpvote.setImageResource(R.drawable.ic_baseline_thumb_up_24)
+                    }else{
+                        Toast.makeText(this@DetailStoreActivity,"Gagal PostVotes ${response.code()}",Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(this@DetailStoreActivity,"Gagal PostVotes ${response.code()}",Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<PostVotesResponse>, t: Throwable) {
+                Toast.makeText(this@DetailStoreActivity,"Gagal Post ${t.message}",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.kutoko.data
 
 import android.os.Parcelable
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -18,7 +19,8 @@ data class Favorite(
 data class User(
     var userId: String? = null,
     var name: String? = null,
-    var token: String? = null
+    var token: String? = null,
+    var avatar: String? = null
 ) : Parcelable
 
 data class Location(
@@ -82,4 +84,26 @@ data class MyStore(
     val name: String,
     @field:SerializedName("avatar")
     val avatar: String
+): Parcelable
+
+
+@Parcelize
+data class RecomendationStore(
+    val id : String,
+
+    val name : String,
+
+    val google_maps_rating : String?,
+
+    val avatar : String,
+
+    val is_voted : Boolean,
+
+    val upvotes : Int,
+
+    val categories : String? = null,
+
+    val distance_in_m : Double,
+
+    val distance_in_km: Double
 ): Parcelable

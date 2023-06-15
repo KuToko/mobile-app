@@ -49,12 +49,14 @@ class BerandaFragment : Fragment() {
         //recylerview
 
         recomendRecylerView = binding.rvRekomendasi
-        val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
-        layoutManager.reverseLayout = false
-
+        val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false).apply {
+            reverseLayout = false
+            stackFromEnd = false
+        }
         recomendRecylerView.layoutManager = layoutManager
+//        setUserRecomendationWithDelay()
+        setUserRecomendation()
 
-        setUserRecomendationWithDelay()
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)
         setUserStoreWithDelay()
@@ -104,11 +106,10 @@ class BerandaFragment : Fragment() {
 
         recomendationPageViewModel.recomendStore.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle,it)
-            adapter.notifyItemRangeChanged(0, adapter.itemCount)
-            recomendRecylerView.scrollToPosition(0)
+            recomendRecylerView.scrollToPosition(adapter.itemCount)
         }
 
-        binding.rvRekomendasi.layoutManager =  LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, true)
+
 
 
     }

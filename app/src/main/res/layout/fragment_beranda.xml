@@ -16,10 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <!--Alamat Saat ini-->
             <LinearLayout
@@ -84,62 +83,61 @@
                     android:textColor="@color/black" />
             </LinearLayout>
 
-            <!--UMKM Rekomendasi-->
-            <LinearLayout
-                android:id="@+id/layoutrekomendasi"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/umkm_rekomendasi"
+                android:textColor="@color/main"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_alamatsaatini" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_rekomendasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_alamatsaatini"
-                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:background="@color/main"
+                android:orientation="horizontal"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_alamatsaatini">
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/umkm_rekomendasi"
-                    android:textColor="@color/main"
-                    android:textSize="20sp" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/umkm_sekitar"
+                android:textColor="@color/main"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_rekomendasi" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_rekomendasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/main"
-                    android:orientation="horizontal"
-                    android:padding="10dp" />
-            </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_umkm_disekitar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/layoutrekomendasi"
-                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:paddingBottom="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutrekomendasi">
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/umkm_sekitar"
-                    android:textColor="@color/main"
-                    android:textSize="20sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_umkm_disekitar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="30dp"
-                    android:background="@color/white"
-                    android:padding="10dp" />
-            </LinearLayout>
-        </LinearLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

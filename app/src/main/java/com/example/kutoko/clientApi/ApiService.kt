@@ -71,16 +71,32 @@ interface ApiService {
     fun uploadProduct(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody,
-        @Part("name") name : String,
-        @Part("price") price : Int,
-        @Part("business_id") business_id : String
+        @Part("business_id") business_id : RequestBody,
+        @Part("name") name : RequestBody,
+        @Part("price") price : RequestBody,
+        @Part("description") description: RequestBody
     ) : Call<UploadProductResponse>
-
 
     @GET("businesses/my/business")
     fun getMyStore(
         @Header("Authorization") token: String?
     ) : Call<MyStoreResponse>
 
+
+    //votes
+    @GET("votes")
+    fun getVotes(
+        @Header("Authorization") token: String
+    ) : Call<UserVotesResponse>
+
+    @POST("votes")
+    fun postVotes(
+        @Header("Authorization") token: String?
+    ) : Call<PostVotesResponse>
+
+    @DELETE("votes/{id}")
+    fun deleteVotes(
+        @Header("Authorization") token: String?,
+        @Path("id") idStore : String
+    ) : Call<DeleteVotesResponse>
 }

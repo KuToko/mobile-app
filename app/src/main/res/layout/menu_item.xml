@@ -19,11 +19,12 @@
 
         <ImageView
             android:id="@+id/iv_toko_terdekat"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:src="@drawable/food"
+            android:layout_width="320dp"
+            android:layout_height="145dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/toko_saya"
             android:scaleType="fitXY"
-            android:contentDescription="@string/toko_saya"/>
+            android:src="@drawable/food" />
 
         <TextView
             android:id="@+id/tv_nama_toko"

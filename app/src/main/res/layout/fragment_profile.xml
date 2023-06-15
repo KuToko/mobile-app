@@ -90,20 +90,21 @@
         android:textColor="@color/main"
         android:textStyle="bold"
         android:textSize="20sp"/>
+
     <!--Akun dan Keamanan-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|start"
-        android:padding="10dp"
-        android:drawableLeft="@drawable/ic_user_black"
-        android:drawableRight="@drawable/ic_right_arrow"
-        android:drawablePadding="5dp"
-        android:background="@drawable/bg_kotak"
-        android:text="@string/akun_dan_keamanan"
-        android:textColor="@color/main"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center|start"-->
+<!--        android:padding="10dp"-->
+<!--        android:drawableLeft="@drawable/ic_user_black"-->
+<!--        android:drawableRight="@drawable/ic_right_arrow"-->
+<!--        android:drawablePadding="5dp"-->
+<!--        android:background="@drawable/bg_kotak"-->
+<!--        android:text="@string/akun_dan_keamanan"-->
+<!--        android:textColor="@color/main"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="20sp"/>-->
     <!--Logout-->
     <TextView
         android:id="@+id/logout"

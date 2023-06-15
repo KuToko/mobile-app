@@ -18,8 +18,8 @@
         <ImageView
             android:id="@+id/iv_product_img"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:src="@drawable/food"/>
+            android:layout_height="141dp"
+            android:src="@drawable/food" />
 
         <TextView
             android:id="@+id/tv_nama_product"
@@ -40,8 +40,10 @@
 
         <Button
             android:id="@+id/bt_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
             android:text="@string/edit"
             android:layout_gravity="right"/>
 

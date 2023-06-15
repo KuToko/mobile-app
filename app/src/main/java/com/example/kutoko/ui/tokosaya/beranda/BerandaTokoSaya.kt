@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.kutoko.R
 import com.example.kutoko.adapter.adapterTokoSaya.ProductTokoSayaAdapter
 import com.example.kutoko.databinding.FragmentBerandaTokoSayaBinding
+import com.example.kutoko.ui.tokosaya.upload.UploadProductActivity
 import com.example.kutoko.util.TokenManager
 
 class BerandaTokoSaya : Fragment() {
@@ -41,10 +42,17 @@ class BerandaTokoSaya : Fragment() {
             Glide.with(this).load(imageUrl).placeholder(R.drawable.ic_baseline_image_24).timeout(30_000).into(binding.ivTokoSaya)
             binding.tvNamaToko.text = it.name
             loadProduct(it.id)
+
         }
 
         binding.btTambahProduk.setOnClickListener {
-            val intent = Intent()
+            viewModel.myStore.observe(viewLifecycleOwner){ store ->
+                val intent = Intent(requireActivity(),UploadProductActivity::class.java)
+                intent.putExtra(UploadProductActivity.BUSINESS_ID, store.id)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+
         }
         return binding.root
     }
