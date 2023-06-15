@@ -1,4 +1,4 @@
-package com.example.kutoko.data
+package com.example.kutoko.data.apiResponse
 
 import com.google.gson.annotations.SerializedName
 

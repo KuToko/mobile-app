@@ -1,6 +1,7 @@
 package com.example.kutoko.clientApi
 
 import com.example.kutoko.data.*
+import com.example.kutoko.data.apiResponse.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -46,4 +47,20 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("business_id") q: String
     ) : Call<ListProductResponse>
+
+    @GET("recommendation/similar/{idToko}")
+    fun getSimiliarStore(
+        @Header("Authorization") token: String,
+        @Path("idToko") idToko: String,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+    ): Call<SimiliarBusinessResponse>
+
+    @GET("businesses/search")
+    fun findStore(
+        @Header("Authorization") token: String,
+        @Query("q") q: String,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+    ): Call<FindBusinessResponse>
 }

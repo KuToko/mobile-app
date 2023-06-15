@@ -11,7 +11,7 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.RegisterResponse
+import com.example.kutoko.data.apiResponse.RegisterResponse
 import com.example.kutoko.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Response

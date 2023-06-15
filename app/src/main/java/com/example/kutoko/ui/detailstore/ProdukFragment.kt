@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kutoko.adapter.ListProductAdapter
+import com.example.kutoko.R
+import com.example.kutoko.adapter.adapterListProduct.ListProductAdapter
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.DataItem
-import com.example.kutoko.data.ListProductResponse
+import com.example.kutoko.data.apiResponse.ListProductResponse
 import com.example.kutoko.databinding.FragmentProdukBinding
 import com.example.kutoko.util.TokenManager
 import retrofit2.Call
@@ -45,7 +42,7 @@ class ProdukFragment : Fragment() {
 
         val token = TokenManager.token
 
-        val layoutManager = LinearLayoutManager(requireActivity())
+        val layoutManager = LinearLayoutManager(context)
         binding.rvProduk.layoutManager = layoutManager
 
         getListProduct(token.toString(), idToko.toString())
@@ -60,17 +57,16 @@ class ProdukFragment : Fragment() {
                     if (listProduct != null && listProduct.isNotEmpty()){
                         val adapter = ListProductAdapter(listProduct)
                         binding.rvProduk.adapter = adapter
+                        binding.tvProdukKosong.text = ""
                         Log.d("List Product", "Size Product : ${listProduct.size}")
                         Log.d("List Product", "idToko : $idToko")
                     }else{
-                        binding.rvProduk.isVisible = false
-                        binding.tvProdukKosong.isVisible = true
+                        binding.tvProdukKosong.text = getString(R.string.data_produk_kosong)
                         Log.e("List Product", "Size Product : ${listProduct?.size}")
                         Log.e("List Product", "idToko : $idToko")
                     }
                 } else {
-                    binding.rvProduk.isVisible = false
-                    binding.tvProdukKosong.isVisible = true
+                    binding.tvProdukKosong.text = getString(R.string.data_produk_kosong)
                     Log.e("List Product", "onResponseFailure Token : $token")
                     Log.e("List Product", "onResponseFailure idToko : $idToko")
                     Log.e("List Product", "onResponseFailure Response : ${response.raw()}")

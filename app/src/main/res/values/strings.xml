@@ -58,5 +58,7 @@
     <string name="addLocation">Masukan Lokasi Ini</string>
     <string name="data_produk_kosong">Data Produk Kosong</string>
     <string name="favorite_click">Button Favorite Clicked</string>
+    <string name="bisnis_serupa">Bisnis yang Serupa</string>
+    <string name="text_tidak_dapat_ditemukan">%s tidak dapat ditemukan</string>
 
 </resources>

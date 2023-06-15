@@ -2,13 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.detailstore.ProdukFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_produk"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tv_produk_kosong"
@@ -17,6 +17,5 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        android:text="@string/data_produk_kosong"/>
+        tools:text="@string/data_produk_kosong"/>
 </FrameLayout>

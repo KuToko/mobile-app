@@ -7,31 +7,37 @@
     android:orientation="vertical"
     tools:context=".ui.search.SearchFragment">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/et_search"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:background="@drawable/bg_search"
-        android:layout_marginTop="20dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_primary"
-            android:layout_margin="10dp"/>
-
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="15sp"
-            android:hint="@string/temukan_umkm"/>
-    </LinearLayout>
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp"
+        android:drawableLeft="@drawable/ic_search_primary"
+        android:drawablePadding="10dp"
+        android:hint="@string/temukan_umkm" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_search_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:text="@string/text_tidak_dapat_ditemukan"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

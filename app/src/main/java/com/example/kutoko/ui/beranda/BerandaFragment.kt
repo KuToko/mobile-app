@@ -23,10 +23,8 @@ import com.example.kutoko.databinding.FragmentBerandaBinding
 import com.example.kutoko.ui.userLocation.LocationList
 import com.example.kutoko.util.LocationManager
 import com.example.kutoko.util.TokenManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class BerandaFragment : Fragment() {
 

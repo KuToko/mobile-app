@@ -13,9 +13,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import com.example.kutoko.MainActivity
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.LoginResponse
+import com.example.kutoko.data.apiResponse.LoginResponse
 import com.example.kutoko.data.User
 import com.example.kutoko.data.UserPreference
 import com.example.kutoko.databinding.ActivityLoginBinding

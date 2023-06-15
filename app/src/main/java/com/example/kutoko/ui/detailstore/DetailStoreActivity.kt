@@ -5,19 +5,24 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
+import com.example.kutoko.adapter.adapterSimiliar.SimiliarAdapter
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.DetailStoreResponse
+import com.example.kutoko.data.apiResponse.DetailStoreResponse
 import com.example.kutoko.data.Favorite
+import com.example.kutoko.data.apiResponse.SimiliarBusinessResponse
 import com.example.kutoko.data.database.favoriteDatabase.ListFavoriteItem
 import com.example.kutoko.databinding.ActivityDetailStoreBinding
 import com.example.kutoko.ui.favorite.viewmodel.FavoriteViewModelFactory
 import com.example.kutoko.ui.favorite.viewmodel.MainFavoriteViewModel
 import com.example.kutoko.util.FavoriteManager
+import com.example.kutoko.util.LocationManager
 import com.example.kutoko.util.TokenManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -48,6 +53,9 @@ class DetailStoreActivity : AppCompatActivity() {
 
         val token = TokenManager.token.toString()
         val idToko = intent.getStringExtra("idToko").toString()
+        val lat = LocationManager.lat
+        val long = LocationManager.long
+
         mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
 
         Toast.makeText(this,"${binding.btAddFavorite.tag}",Toast.LENGTH_SHORT).show()
@@ -62,11 +70,16 @@ class DetailStoreActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-
         getDetailtoko(token, idToko)
 
-        val store = intent.getParcelableExtra<Favorite>(STORE_PROFILE)
 
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSimiliarBusiness.layoutManager = layoutManager
+
+        getSimiliar(token, idToko, lat, long)
+
+
+        val store = intent.getParcelableExtra<Favorite>(STORE_PROFILE)
         if (store != null) {
             mainFavoriteViewModel.getAllFavorite().observe(this) {
                 if (it != null) {
@@ -77,7 +90,6 @@ class DetailStoreActivity : AppCompatActivity() {
 
         binding.btAddFavorite.setOnClickListener {
             Toast.makeText(this,"coba 1",Toast.LENGTH_SHORT).show()
-
 
             if (store != null) {
                 val favorite = ListFavoriteItem(0,store.Id,store.name,store.avatar,store.upvotes,store.categories)
@@ -95,8 +107,37 @@ class DetailStoreActivity : AppCompatActivity() {
             }
 
         }
-
     }
+
+    private fun getSimiliar(token: String, idToko: String, lat: Double, long: Double) {
+
+        val detailClient = ApiConfig.getApiService().getSimiliarStore("Bearer $token", idToko, lat, long)
+        detailClient.enqueue(object : retrofit2.Callback<SimiliarBusinessResponse> {
+            override fun onResponse(call: Call<SimiliarBusinessResponse>, response: Response<SimiliarBusinessResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val similiarBusiness = response.body()!!.data
+                    if (similiarBusiness != null && similiarBusiness.isNotEmpty()){
+                        val adapter = SimiliarAdapter(similiarBusiness)
+                        binding.linearSimiliarBusiness.isVisible = true
+                        binding.rvSimiliarBusiness.adapter = adapter
+                    }else{
+                        binding.linearSimiliarBusiness.isVisible = false
+                        Log.e("Similiar Store", "Size Similiar Store : ${similiarBusiness?.size}")
+                        Log.e("Similiar Store", "idToko : $idToko")
+                    }
+                } else {
+                    Log.e("Detail Toko", "onResponseFailure Token : $token")
+                    Log.e("Detail Toko", "onResponseFailure Response : ${response.raw()}")
+                }
+            }
+
+            override fun onFailure(call: Call<SimiliarBusinessResponse>, t: Throwable) {
+                //_isLoading.value = false
+                Log.e("Detail Toko", "onEnqueueFailure: ${t.message}")
+            }
+        })
+    }
+
 
     private fun obtainMainViewModel(activity: AppCompatActivity): MainFavoriteViewModel {
         val factory = FavoriteViewModelFactory.getInstance(activity.application)
