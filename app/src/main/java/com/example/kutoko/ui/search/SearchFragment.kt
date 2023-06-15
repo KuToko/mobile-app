@@ -26,11 +26,12 @@ import kotlin.concurrent.timerTask
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var timer : Timer
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,

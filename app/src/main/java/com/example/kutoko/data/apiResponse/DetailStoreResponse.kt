@@ -41,7 +41,7 @@ data class DataDetailItem(
 	val userName: Any? = null,
 
 	@field:SerializedName("latitude")
-	val latitude: String? = null,
+	val latitude: Double,
 
 	@field:SerializedName("description")
 	val description: String? = null,
@@ -98,7 +98,7 @@ data class DataDetailItem(
 	val placeId: String? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: String? = null,
+	val longitude: Double,
 
 	@field:SerializedName("google_maps_rating")
 	val googleMapsRating: Any? = null,

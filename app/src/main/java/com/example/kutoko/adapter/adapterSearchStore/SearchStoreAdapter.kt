@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
 import com.example.kutoko.data.apiResponse.DataSearchItem
-import com.example.kutoko.databinding.ItemListProdukBinding
 import com.example.kutoko.databinding.MenuItemBinding
 import com.example.kutoko.ui.detailstore.DetailStoreActivity
 
@@ -31,8 +30,8 @@ class SearchStoreAdapter(private val listProduct: List<DataSearchItem>) : Recycl
         }else{
             listProduct[position].distanceInKm.toInt().toString() + "km"
         }
-        //holder.kategori.text = listProduct[position].categories
-        holder.rating.text = listProduct[position].name
+        holder.kategori.text = listProduct[position].categories?.get(0)?.name
+        holder.rating.text = listProduct[position].upvotes.toString()
 
         holder.itemView.setOnClickListener {
             val moveIntent = Intent(holder.itemView.context, DetailStoreActivity::class.java)
@@ -43,7 +42,7 @@ class SearchStoreAdapter(private val listProduct: List<DataSearchItem>) : Recycl
 
     override fun getItemCount() = listProduct.size
 
-    class ViewHolder(private val binding: MenuItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(binding: MenuItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val image: ImageView = binding.ivTokoTerdekat
         val name: TextView = binding.tvNamaToko
         val jarak: TextView = binding.tvJarakToko

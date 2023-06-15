@@ -35,6 +35,7 @@ class DetailStoreActivity : AppCompatActivity() {
     private lateinit var binding :ActivityDetailStoreBinding
     private lateinit var mainFavoriteViewModel: MainFavoriteViewModel
     private lateinit var detailStoryViewModel : DetailStoreViewModel
+    private lateinit var detailPagerAdapter : DetailPagerAdapter
 
     companion object {
         @StringRes
@@ -63,7 +64,7 @@ class DetailStoreActivity : AppCompatActivity() {
         mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
 
         detailStoryViewModel.getVotes(token)
-        val detailPagerAdapter = DetailPagerAdapter(this)
+        detailPagerAdapter = DetailPagerAdapter(this)
         detailPagerAdapter.idToko = idToko
         //detailPagerAdapter.username =
         val viewPager: ViewPager2 = binding.vpDetail
@@ -142,6 +143,7 @@ class DetailStoreActivity : AppCompatActivity() {
                         Log.e("Similiar Store", "idToko : $idToko")
                     }
                 } else {
+                    binding.linearSimiliarBusiness.isVisible = false
                     Log.e("Detail Toko", "onResponseFailure Token : $token")
                     Log.e("Detail Toko", "onResponseFailure Response : ${response.raw()}")
                 }
@@ -196,12 +198,20 @@ class DetailStoreActivity : AppCompatActivity() {
 
     private fun setDetailToko(it: DetailStoreResponse?) {
 
-        Glide.with(this)
-            .load(it?.data?.avatar)
-            .placeholder(R.drawable.ic_baseline_image_24)
-            .into(binding.ivDetailImg)
-        binding.tvDetailNama.text = it?.data?.businessName
-        binding.detailUpvote.text = String.format(getString(R.string.detailUpvote), it?.data?.upvotes)
+        if (it != null) {
+            if (it.data != null){
+
+                detailPagerAdapter.tokoLat = it.data.latitude
+                detailPagerAdapter.tokoLong = it.data.longitude
+
+                Glide.with(this)
+                    .load(it.data.avatar)
+                    .placeholder(R.drawable.ic_baseline_image_24)
+                    .into(binding.ivDetailImg)
+                binding.tvDetailNama.text = it.data.businessName
+                binding.detailUpvote.text = String.format(getString(R.string.detailUpvote), it.data.upvotes)
+            }
+        }
 
     }
 

@@ -8,7 +8,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class DetailPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity)  {
 
     var idToko : String? = null
-
+    var tokoLat :Double = 0.0
+    var tokoLong :Double = 0.0
     override fun getItemCount(): Int {
         return 2
     }
@@ -23,6 +24,8 @@ class DetailPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(act
 
         fragment?.arguments = Bundle().apply {
             putString("idToko", idToko)
+            putDouble("tokoLat", tokoLat)
+            putDouble("tokoLong", tokoLong)
         }
 
         return fragment as Fragment

@@ -19,6 +19,7 @@
             android:textStyle="bold"
             android:text="@string/lokasi_penjual"/>
 
+
         <TextView
             android:id="@+id/info_alamat"
             android:layout_width="wrap_content"
@@ -30,6 +31,12 @@
             android:textSize="15sp"
             android:textColor="@color/black"
             tools:text="@string/dummy_address" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
 
         <TextView
             android:layout_width="wrap_content"
