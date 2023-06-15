@@ -37,10 +37,10 @@ class LocationList : AppCompatActivity() {
         }
 
         binding.btTambahLokasi.setOnClickListener {
+            finish()
             startActivity(Intent(this,AddLocation::class.java))
+
         }
-
-
     }
 
     private fun obtainMainViewModel(activity: AppCompatActivity): MainLocationViewModel {

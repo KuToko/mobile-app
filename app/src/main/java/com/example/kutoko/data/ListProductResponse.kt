@@ -58,3 +58,9 @@ data class DataItem(
 	@field:SerializedName("business_id")
 	val businessId: String? = null
 )
+
+
+data class UploadProductResponse(
+	@field:SerializedName("message")
+	val message: String
+)

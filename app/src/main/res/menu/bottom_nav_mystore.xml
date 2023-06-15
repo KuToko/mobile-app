@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_storefront_24"
+        android:color="#FFFFFF"
+        android:tint="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:tooltipText="@string/title_mystore"
+        android:title="@string/title_mystore" />
+
+    <item
+        android:id="@+id/nav_order"
+        android:icon="@drawable/ic_user"
+        android:color="#FFFFFF"
+        android:tint="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:tooltipText="@string/title_orderanku"
+        android:title="@string/title_orderanku" />
+
+</menu>

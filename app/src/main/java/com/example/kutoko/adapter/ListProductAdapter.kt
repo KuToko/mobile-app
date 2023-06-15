@@ -24,12 +24,12 @@ class ListProductAdapter(private val listProduct: List<DataItem>) : RecyclerView
             .into(holder.image)
         holder.name.text = listProduct[position].name
         holder.desc.text = listProduct[position].description
-        holder.desc.text = "Rp. ${listProduct[position].price}"
+        holder.price.text = "Rp. ${listProduct[position].price}"
     }
 
     override fun getItemCount() = listProduct.size
 
-    class ViewHolder(private val binding: ItemListProdukBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(var binding: ItemListProdukBinding) : RecyclerView.ViewHolder(binding.root) {
         val image:ImageView = binding.ivProductImg
         val name: TextView = binding.tvProductName
         val desc: TextView = binding.tvProductDesc

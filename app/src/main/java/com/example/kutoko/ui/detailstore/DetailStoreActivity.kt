@@ -49,9 +49,6 @@ class DetailStoreActivity : AppCompatActivity() {
         val token = TokenManager.token.toString()
         val idToko = intent.getStringExtra("idToko").toString()
         mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
-
-        Toast.makeText(this,"${binding.btAddFavorite.tag}",Toast.LENGTH_SHORT).show()
-
         val detailPagerAdapter = DetailPagerAdapter(this)
         detailPagerAdapter.idToko = idToko
         //detailPagerAdapter.username =
@@ -76,19 +73,15 @@ class DetailStoreActivity : AppCompatActivity() {
         }
 
         binding.btAddFavorite.setOnClickListener {
-            Toast.makeText(this,"coba 1",Toast.LENGTH_SHORT).show()
 
 
             if (store != null) {
                 val favorite = ListFavoriteItem(0,store.Id,store.name,store.avatar,store.upvotes,store.categories)
 
                 if (!FavoriteManager.isAdded) {
-                    Toast.makeText(this,"add",Toast.LENGTH_SHORT).show()
-                    binding.btAddFavorite.tag = "favorite_add"
                     mainFavoriteViewModel.insertFavorite(favorite)
                     binding.btAddFavorite.setImageResource(R.drawable.solidheart)
                 }else{
-                    Toast.makeText(this,"del",Toast.LENGTH_SHORT).show()
                     mainFavoriteViewModel.deleteFavorite(store.Id)
                     binding.btAddFavorite.setImageResource(R.drawable.stripeheart)
                 }

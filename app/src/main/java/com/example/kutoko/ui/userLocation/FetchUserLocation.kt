@@ -107,7 +107,7 @@ class FetchUserLocation : AppCompatActivity(){
                 finish()
             }
 
-        },400)
+        },200)
     }
 
     @Suppress("DEPRECATION")

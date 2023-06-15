@@ -1,5 +1,6 @@
 package com.example.kutoko.adapter.adapterFavorite
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,6 +30,12 @@ class FavoriteAdapter(private val listFavorite: List<Favorite>) : RecyclerView.A
             intent.putExtra("idToko", favoriteItem.Id )
             intent.putExtra(DetailStoreActivity.STORE_PROFILE,Favorite(favoriteItem.Id,favoriteItem.name,favoriteItem.upvotes,favoriteItem.avatar,favoriteItem.categories))
             holder.binding.root.context.startActivity(intent)
+
+//            val context = holder.binding.root.context
+//
+//            if (context is Activity){
+//                context.finish()
+//            }
         }
 
     }

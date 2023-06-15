@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.beranda.BerandaFragment">
 
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!--Alamat Saat ini-->
             <LinearLayout
+                android:id="@+id/layout_alamatsaatini"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/main"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,9 +86,14 @@
 
             <!--UMKM Rekomendasi-->
             <LinearLayout
+                android:id="@+id/layoutrekomendasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_below="@+id/layout_alamatsaatini"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_alamatsaatini">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,11 +112,14 @@
                     android:padding="10dp" />
             </LinearLayout>
 
-            <!--UMKM Terdekat-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_below="@id/layoutrekomendasi"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutrekomendasi">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,10 +132,14 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_umkm_disekitar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
                     android:background="@color/white"
                     android:padding="10dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

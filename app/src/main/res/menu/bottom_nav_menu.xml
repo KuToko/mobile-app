@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/navigation_beranda"
-        android:icon="@drawable/ic_beranda"
-        android:color="#FFFFFF"
-        android:tint="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:tooltipText="@string/title_beranda"
-        android:title="@string/title_beranda" />
+        android:color="#FFFFFF"
+        android:icon="@drawable/ic_beranda"
+        android:tint="#FFFFFF"
+        android:title="@string/title_beranda"
+        android:tooltipText="@string/title_beranda" />
 
     <item
         android:id="@+id/navigation_cari"
-        android:icon="@drawable/ic_search_white"
-        android:color="#FFFFFF"
-        android:tint="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:tooltipText="@string/title_cari"
-        android:title="@string/title_cari" />
+        android:color="#FFFFFF"
+        android:icon="@drawable/ic_search_white"
+        android:tint="#FFFFFF"
+        android:title="@string/title_cari"
+        android:tooltipText="@string/title_cari" />
 
     <!--
     <item
@@ -28,20 +28,20 @@
 
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_favorite"
-        android:color="#FFFFFF"
-        android:tint="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:tooltipText="@string/title_favorite"
-        android:title="@string/title_favorite" />
+        android:color="#FFFFFF"
+        android:icon="@drawable/ic_favorite"
+        android:tint="#FFFFFF"
+        android:title="@string/title_favorite"
+        android:tooltipText="@string/title_favorite" />
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_user"
-        android:color="#FFFFFF"
-        android:tint="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:tooltipText="@string/title_profile"
-        android:title="@string/title_profile" />
+        android:color="#FFFFFF"
+        android:icon="@drawable/ic_user"
+        android:tint="#FFFFFF"
+        android:title="@string/title_profile"
+        android:tooltipText="@string/title_profile" />
 
 </menu>

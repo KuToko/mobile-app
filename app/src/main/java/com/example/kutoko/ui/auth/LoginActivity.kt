@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         mUserPreference = UserPreference(this)
         if (mUserPreference.getUser().token.toString().isNotEmpty()){
+
             TokenManager.token = mUserPreference.getUser().token.toString()
             startActivity(Intent(this,FetchUserLocation::class.java))
             finish()

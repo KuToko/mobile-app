@@ -11,7 +11,7 @@ class StoreRepository(private val storeDatabase: StoreDatabase, private val apiS
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 10
+                pageSize = 16
             ),
             remoteMediator = StoreRemoteMediator(storeDatabase,apiService),
             pagingSourceFactory = {

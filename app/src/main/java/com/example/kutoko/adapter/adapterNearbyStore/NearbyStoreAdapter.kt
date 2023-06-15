@@ -73,6 +73,4 @@ class NearbyStoreAdapter : PagingDataAdapter<ListStoreItem, NearbyStoreAdapter.M
             }
         }
     }
-
-
 }

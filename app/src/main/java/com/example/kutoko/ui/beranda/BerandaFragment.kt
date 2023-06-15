@@ -3,11 +3,9 @@ package com.example.kutoko.ui.beranda
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -18,15 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kutoko.adapter.adapterNearbyStore.LoadingStateAdapter
 import com.example.kutoko.adapter.adapterNearbyStore.NearbyStoreAdapter
 import com.example.kutoko.adapter.adapterRecomendationStore.RecomendationAdapter
-import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.databinding.FragmentBerandaBinding
 import com.example.kutoko.ui.userLocation.LocationList
 import com.example.kutoko.util.LocationManager
-import com.example.kutoko.util.TokenManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class BerandaFragment : Fragment() {
 
@@ -55,15 +49,15 @@ class BerandaFragment : Fragment() {
         //recylerview
 
         recomendRecylerView = binding.rvRekomendasi
-        recomendRecylerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
         layoutManager.reverseLayout = false
+
         recomendRecylerView.layoutManager = layoutManager
+
         setUserRecomendationWithDelay()
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)
         setUserStoreWithDelay()
-        Toast.makeText(requireActivity(),"${TokenManager.token}",Toast.LENGTH_LONG).show()
         binding.btGantiLokasi.setOnClickListener {
             startActivity(Intent(requireActivity(),LocationList::class.java))
             requireActivity().finish()
@@ -110,10 +104,12 @@ class BerandaFragment : Fragment() {
 
         recomendationPageViewModel.recomendStore.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle,it)
-            recomendRecylerView.post {
-                recomendRecylerView.scrollToPosition(0)
-            }
+            adapter.notifyItemRangeChanged(0, adapter.itemCount)
+            recomendRecylerView.scrollToPosition(0)
         }
+
+        binding.rvRekomendasi.layoutManager =  LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, true)
+
 
     }
 

@@ -37,26 +37,18 @@ class FavoriteFragment : Fragment() {
     ): View {
 
         _binding =  FragmentFavoriteBinding.inflate(inflater, container, false)
-
         val manager = LinearLayoutManager(requireActivity())
         binding.rvFavorite.layoutManager = manager
         binding.rvFavorite.setHasFixedSize(true)
-
-        val activity = requireActivity()
+        showLoading(true)
 
         mainFavoriteViewModel = obtainMainViewModel(requireActivity() as AppCompatActivity)
 
         mainFavoriteViewModel.getAllFavorite().observe(requireActivity()) {
+            showLoading(false)
             setUserFavorite(it)
         }
 
-        coroutineScope.launch {
-            showLoading(false)
-            delay(2000)
-            mainFavoriteViewModel.getAllFavorite().observe(activity) { favorites ->
-                setUserFavorite(favorites)
-            }
-        }
 
         return binding.root
     }
@@ -81,7 +73,10 @@ class FavoriteFragment : Fragment() {
         if (favoriteStore.isNotEmpty()) {
             val adapter = FavoriteAdapter(favoriteStore)
             binding.rvFavorite.adapter = adapter
+            adapter.notifyDataSetChanged()
         }else{
+            val adapter = FavoriteAdapter(emptyList())
+            binding.rvFavorite.adapter = adapter
             binding.tvFavorite.text = "Belum ada Store Favorite Yang Di Tambahkan"
         }
     }

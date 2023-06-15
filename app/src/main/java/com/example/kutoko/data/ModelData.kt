@@ -64,3 +64,22 @@ data class StoreCategory(
     @field:SerializedName("name")
     val name : String
 )
+
+
+data class MyStoreResponse(
+    @field:SerializedName("error")
+    val error: Boolean,
+    @field:SerializedName("data")
+    val data : List<MyStore>
+)
+
+
+@Parcelize
+data class MyStore(
+    @field:SerializedName("id")
+    val id: String,
+    @field:SerializedName("name")
+    val name: String,
+    @field:SerializedName("avatar")
+    val avatar: String
+): Parcelable

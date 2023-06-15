@@ -17,10 +17,13 @@
         android:background="@color/main">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_ProfileUser"
             android:layout_width="100dp"
             android:layout_height="100dp"
             tools:src="@tools:sample/avatars"/>
+
         <TextView
+            android:id="@+id/tv_ProfileUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -31,6 +34,7 @@
 
         <!--Button-->
         <LinearLayout
+            android:id="@+id/bt_openStore"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -58,6 +62,7 @@
 
     <!--Toko Saya-->
     <TextView
+        android:id="@+id/bt_openMyStore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center|start"
@@ -72,6 +77,7 @@
         android:textSize="20sp"/>
     <!--Alamat Saya-->
     <TextView
+        android:id="@+id/bt_openMyAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center|start"

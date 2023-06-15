@@ -1,5 +1,6 @@
 package com.example.kutoko.adapter.adapterLocation
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,6 +28,12 @@ class LocationAdapter(private val listLocation: List<Location>) : RecyclerView.A
             LocationManager.addressLocation = locationItem.address
             val intent = Intent(holder.binding.root.context, MainActivity::class.java)
             holder.binding.root.context.startActivity(intent)
+
+            val context = holder.binding.root.context
+
+            if (context is Activity){
+                context.finish()
+            }
         }
     }
 

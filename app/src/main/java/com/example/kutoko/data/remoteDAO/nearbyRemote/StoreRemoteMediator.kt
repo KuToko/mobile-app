@@ -34,6 +34,7 @@ class StoreRemoteMediator (
         loadType: LoadType,
         state: PagingState<Int, ListStoreItem>
     ): MediatorResult {
+
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -71,7 +72,6 @@ class StoreRemoteMediator (
                 val store = ListStoreItem(responseData[i].id,responseData[i].name,responseData[i].google_maps_rating,responseData[i].avatar,responseData[i].is_voted,responseData[i].upvotes,kategori,responseData[i].distance_in_m,responseData[i].distance_in_km)
                 dataStore.add(store)
             }
-            delay(1000)
             val endOfPaginationReached = responseData.isEmpty()
             Log.d("ResponseData Toko Terdekat", "${responseData.size} jumlah")
             database.withTransaction {
@@ -88,11 +88,11 @@ class StoreRemoteMediator (
                 database.remoteKeysDAO().insertAll(keys)
                 database.storeRemote().addStories(dataStore)
             }
+//            delay(4000)
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {
             Log.d("ResponseData di toko terdekat", "gagal ${exception.message}")
             database.remoteKeysDAO().deleteRemoteKeys()
-            database.storeRemote().deleteAll()
             return MediatorResult.Error(exception)
         }
     }
