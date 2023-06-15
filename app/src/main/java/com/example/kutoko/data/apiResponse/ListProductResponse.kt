@@ -1,11 +1,11 @@
-package com.example.kutoko.data
+package com.example.kutoko.data.apiResponse
 
 import com.google.gson.annotations.SerializedName
 
 data class ListProductResponse(
 
 	@field:SerializedName("pagination")
-	val pagination: Pagination? = null,
+	val pagination: PaginationListProduct? = null,
 
 	@field:SerializedName("data")
 	val data: List<DataItem>? = null,
@@ -17,7 +17,7 @@ data class ListProductResponse(
 	val message: String? = null
 )
 
-data class Pagination(
+data class PaginationListProduct(
 
 	@field:SerializedName("perPage")
 	val perPage: Int? = null,

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.DetailStoreResponse
+import com.example.kutoko.data.apiResponse.DetailStoreResponse
 import com.example.kutoko.databinding.FragmentInformasiBinding
 import com.example.kutoko.util.TokenManager
 import retrofit2.Call
@@ -23,7 +23,7 @@ class InformasiFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentInformasiBinding.inflate(inflater, container, false)
         return binding.root
     }

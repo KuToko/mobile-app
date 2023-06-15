@@ -1,4 +1,4 @@
-package com.example.kutoko.adapter
+package com.example.kutoko.adapter.adapterListProduct
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
-import com.example.kutoko.data.DataItem
+import com.example.kutoko.data.apiResponse.DataItem
 import com.example.kutoko.databinding.ItemListProdukBinding
 
 class ListProductAdapter(private val listProduct: List<DataItem>) : RecyclerView.Adapter<ListProductAdapter.ViewHolder>()  {

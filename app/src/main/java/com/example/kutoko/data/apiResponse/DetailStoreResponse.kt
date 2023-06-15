@@ -1,11 +1,11 @@
-package com.example.kutoko.data
+package com.example.kutoko.data.apiResponse
 
 import com.google.gson.annotations.SerializedName
 
 data class DetailStoreResponse(
 
 	@field:SerializedName("data")
-	val data: Data? = null,
+	val data: DataDetailItem? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -14,7 +14,7 @@ data class DetailStoreResponse(
 	val message: String? = null
 )
 
-data class CategoriesItem(
+data class CategoriesDetailItem(
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -23,7 +23,7 @@ data class CategoriesItem(
 	val id: String? = null
 )
 
-data class Data(
+data class DataDetailItem(
 
 	@field:SerializedName("saturday_end_time")
 	val saturdayEndTime: Any? = null,
@@ -86,7 +86,7 @@ data class Data(
 	val id: String? = null,
 
 	@field:SerializedName("categories")
-	val categories: List<CategoriesItem?>? = null,
+	val categories: List<CategoriesDetailItem?>? = null,
 
 	@field:SerializedName("tuesday_end_time")
 	val tuesdayEndTime: Any? = null,
