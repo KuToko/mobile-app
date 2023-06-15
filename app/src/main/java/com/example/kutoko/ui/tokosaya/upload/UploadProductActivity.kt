@@ -1,24 +1,31 @@
 package com.example.kutoko.ui.tokosaya.upload
 
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.kutoko.MainActivity
 import com.example.kutoko.clientApi.ApiConfig
 import com.example.kutoko.data.apiResponse.UploadProductResponse
 import com.example.kutoko.databinding.ActivityUploadProductBinding
 import com.example.kutoko.util.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
@@ -31,6 +38,9 @@ class UploadProductActivity : AppCompatActivity() {
     private lateinit var binding : ActivityUploadProductBinding
 
     private var getFile: File? = null
+
+    private val resultIntent = Intent()
+
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -51,8 +61,12 @@ class UploadProductActivity : AppCompatActivity() {
     }
 
     companion object{
+        private val REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA)
         const val BUSINESS_ID = "BUSINESS_ID"
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +75,7 @@ class UploadProductActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra(BUSINESS_ID)
 
+        @Suppress("DEPRECATION")
         binding.btUnggahFoto.setOnClickListener {
             startGallery()
         }
@@ -68,6 +83,7 @@ class UploadProductActivity : AppCompatActivity() {
         binding.btUpload.setOnClickListener {
             showLoading(true)
             if (id != null){
+                Toast.makeText(this,"${id} toko",Toast.LENGTH_SHORT).show()
                 uploadProduct(id)
             }else{
                 showLoading(false)
@@ -104,8 +120,7 @@ class UploadProductActivity : AppCompatActivity() {
         val apiService = ApiConfig.getApiService()
         val file = reduceFileImage(getFile as File)
 
-        val description = binding.tieProductDesc.text.toString().toRequestBody("text/plain".toMediaType())
-        val requestImageFile = file.asRequestBody("image/jpg".toMediaType())
+        val requestImageFile = file.asRequestBody("image/*".toMediaType())
 
         val imageMultipart : MultipartBody.Part = MultipartBody.Part.createFormData(
             "photoProduct",
@@ -114,10 +129,11 @@ class UploadProductActivity : AppCompatActivity() {
         )
 
 
+        val price = createPartFromString(binding.tieProductPrice.text.toString())
+        val name = createPartFromString(binding.tieProductName.text.toString())
+        val id = createPartFromString(idBisnis)
+        val description = createPartFromString(binding.tieProductDesc.text.toString())
 
-        val price = binding.tieProductPrice.text.toString().toRequestBody("text/plain".toMediaType())
-        val name = binding.tieProductName.text.toString().toRequestBody("text/plain".toMediaType())
-        val id = idBisnis.toRequestBody("text/plain".toMediaType())
 
         val token = "Bearer " + TokenManager.token
 
@@ -147,8 +163,7 @@ class UploadProductActivity : AppCompatActivity() {
                     }
                 }else{
                     showLoading(false)
-                    Toast.makeText(this@UploadProductActivity, "${response.message()} else 1 error code : ${response.code()}", Toast.LENGTH_SHORT).show()
-                    Log.d("Uploda Product","${response.body()} ${response.message()} message")
+                    Toast.makeText(this@UploadProductActivity, "${response.message()} else 1 error code : ${response.code()} ${response.errorBody()} ${response.headers()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -158,5 +173,9 @@ class UploadProductActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun createPartFromString(stringData: String): RequestBody {
+        return stringData.toRequestBody("text/plain".toMediaTypeOrNull())
     }
 }

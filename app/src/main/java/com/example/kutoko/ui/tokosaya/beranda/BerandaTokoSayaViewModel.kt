@@ -34,7 +34,7 @@ class BerandaTokoSayaViewModel : ViewModel() {
                 response: Response<MyStoreResponse>
             ) {
                 val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null){
+                if (response.isSuccessful && responseBody != null && responseBody.data.isNotEmpty()){
                     _myStore.value = responseBody.data[0]
                 }else{
                     Log.e("Response my Store Failed","Get MyBusiness Failed: ${response.message()} and ${TokenManager.token}")

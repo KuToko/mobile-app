@@ -54,8 +54,8 @@ class BerandaFragment : Fragment() {
             stackFromEnd = false
         }
         recomendRecylerView.layoutManager = layoutManager
-//        setUserRecomendationWithDelay()
-        setUserRecomendation()
+        setUserRecomendationWithDelay()
+//        setUserRecomendation()
 
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)

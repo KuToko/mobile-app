@@ -64,7 +64,21 @@ data class UploadProductResponse(
 	@field:SerializedName("message")
 	val message: String,
 	@field:SerializedName("data")
-	val data: List<DataItem>
+	val data: List<ProductResponse>
+)
+
+data class ProductResponse(
+	@field:SerializedName("id")
+	val id:String,
+	@field:SerializedName("name")
+	val name:String,
+	@field:SerializedName("price")
+	val price: String,
+	@field:SerializedName("description")
+	val description: String,
+	@field:SerializedName("product_image")
+	val productImage: String,
+
 )
 
 

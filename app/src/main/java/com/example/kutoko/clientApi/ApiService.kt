@@ -77,6 +77,15 @@ interface ApiService {
         @Part("description") description: RequestBody
     ) : Call<UploadProductResponse>
 
+//    @Multipart
+//    @POST("products")
+//    fun uploadProduct(
+//        @Header("Authorization") token: String,
+//        @PartMap() partMap : MutableMap<String, RequestBody>,
+//        @Part file: MultipartBody.Part
+//    ) : Call<UploadProductResponse>
+
+
     @GET("businesses/my/business")
     fun getMyStore(
         @Header("Authorization") token: String?
