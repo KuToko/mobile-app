@@ -60,5 +60,17 @@
     <string name="favorite_click">Button Favorite Clicked</string>
     <string name="bisnis_serupa">Bisnis yang Serupa</string>
     <string name="text_tidak_dapat_ditemukan">%s tidak dapat ditemukan</string>
+    <string name="title_mystore">Toko Saya</string>
+    <string name="title_orderanku">Orderan Ku</string>
+    <string name="title_beranda_toko_saya">Toko Saya</string>
+    <string name="myProducts">Produk Saya</string>
+    <string name="harga_produk">150000</string>
+    <string name="edit">Edit Produk</string>
+    <string name="tambah_produk">Tambah Produk</string>
+    <string name="title_activity_move_to_my_store">MoveToMyStore</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
 
 </resources>
