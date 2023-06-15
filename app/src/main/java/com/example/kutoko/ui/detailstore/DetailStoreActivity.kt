@@ -3,9 +3,7 @@ package com.example.kutoko.ui.detailstore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +31,6 @@ class DetailStoreActivity : AppCompatActivity() {
 
     private lateinit var binding :ActivityDetailStoreBinding
     private lateinit var mainFavoriteViewModel: MainFavoriteViewModel
-    private var favoriteItems: List<ListFavoriteItem> = emptyList()
 
     companion object {
         @StringRes
@@ -77,7 +74,7 @@ class DetailStoreActivity : AppCompatActivity() {
 
         getSimiliar(token, idToko, lat, long)
 
-
+        @Suppress("DEPRECATION")
         val store = intent.getParcelableExtra<Favorite>(STORE_PROFILE)
         if (store != null) {
             mainFavoriteViewModel.getAllFavorite().observe(this) {

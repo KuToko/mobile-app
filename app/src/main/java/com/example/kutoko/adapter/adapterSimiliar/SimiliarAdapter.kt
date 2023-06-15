@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
+import com.example.kutoko.data.Favorite
 import com.example.kutoko.data.apiResponse.DataSimiliarBusiness
 import com.example.kutoko.databinding.RecomendationItemBinding
 import com.example.kutoko.ui.detailstore.DetailStoreActivity
@@ -36,6 +37,17 @@ class SimiliarAdapter(private val listSimiliar: List<DataSimiliarBusiness>) : Re
         holder.itemView.setOnClickListener {
             val moveIntent = Intent(holder.itemView.context, DetailStoreActivity::class.java)
             moveIntent.putExtra("idToko", listSimiliar[position].id )
+            val idStore = listSimiliar[position].id
+            val storeName = listSimiliar[position].name
+            val upVotes = listSimiliar[position].upvotes
+            val avatar = listSimiliar[position].avatar
+            val kategori = listSimiliar[position].categories?.get(0)?.name
+
+            if (idStore != null && storeName != null && upVotes != null && avatar != null && kategori != null){
+                val favorite = Favorite(idStore,storeName,upVotes,avatar,kategori)
+                moveIntent.putExtra(DetailStoreActivity.STORE_PROFILE,
+                    favorite)
+            }
             holder.itemView.context.startActivity(moveIntent)
         }
     }
