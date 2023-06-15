@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kutoko.clientApi.ApiConfig
-import com.example.kutoko.data.DataItem
-import com.example.kutoko.data.ListProductResponse
 import com.example.kutoko.data.MyStore
 import com.example.kutoko.data.MyStoreResponse
+import com.example.kutoko.data.apiResponse.DataItem
+import com.example.kutoko.data.apiResponse.ListProductResponse
 import com.example.kutoko.util.TokenManager
 import retrofit2.Call
 import retrofit2.Response

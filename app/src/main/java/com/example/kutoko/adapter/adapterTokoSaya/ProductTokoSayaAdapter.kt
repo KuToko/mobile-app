@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
-import com.example.kutoko.data.DataItem
+import com.example.kutoko.data.apiResponse.DataItem
 import com.example.kutoko.databinding.MyProductItemBinding
 
 class ProductTokoSayaAdapter(private val listProduct: List<DataItem>) : RecyclerView.Adapter<ProductTokoSayaAdapter.ViewHolder>()
