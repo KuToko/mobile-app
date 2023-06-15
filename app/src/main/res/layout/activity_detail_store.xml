@@ -87,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/main"
                 android:orientation="vertical"
+                android:layout_marginTop="10dp"
                 android:padding="10dp">
 
                 <TextView

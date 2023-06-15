@@ -56,6 +56,8 @@ class DetailStoreActivity : AppCompatActivity() {
         val lat = LocationManager.lat
         val long = LocationManager.long
 
+        title = "Detail UMKM"
+
         mainFavoriteViewModel = obtainMainViewModel(this@DetailStoreActivity)
 
         Toast.makeText(this,"${binding.btAddFavorite.tag}",Toast.LENGTH_SHORT).show()

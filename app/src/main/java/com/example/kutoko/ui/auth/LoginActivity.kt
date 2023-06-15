@@ -43,6 +43,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+
         showLoading(false)
         ActivityCompat.requestPermissions(
             this@LoginActivity,

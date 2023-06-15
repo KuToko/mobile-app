@@ -34,6 +34,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
         showLoading(false)
         binding.registBtn.setOnClickListener {
             showLoading(true)
