@@ -37,14 +37,14 @@ class ProductTokoSayaAdapter(private val listProduct: List<DataItem>) : Recycler
 
         holder.binding.tvNamaProduct.text = productItem.name
         holder.binding.tvHargaProduct.text = "Rp. ${productItem.price}"
-        holder.binding.btEdit.setOnClickListener {
-            val intent = Intent(holder.binding.root.context,UpdateProductActivity::class.java)
-            if(bisnisId != null && name != null && price != null && desc != null && id != null){
-                val product = ProductItem(bisnisId,id,name,price.toString(),desc,image)
-                intent.putExtra(UpdateProductActivity.PRODUCT_ITEM,product)
-                holder.binding.root.context.startActivity(intent)
-            }
-        }
+//        holder.binding.btEdit.setOnClickListener {
+//            val intent = Intent(holder.binding.root.context,UpdateProductActivity::class.java)
+//            if(bisnisId != null && name != null && price != null && desc != null && id != null){
+//                val product = ProductItem(bisnisId,id,name,price.toString(),desc,image)
+//                intent.putExtra(UpdateProductActivity.PRODUCT_ITEM,product)
+//                holder.binding.root.context.startActivity(intent)
+//            }
+//        }
 
         holder.binding.btDelete.setOnClickListener {
             val intent = Intent(holder.binding.root.context,DeleteProductActivity::class.java)
