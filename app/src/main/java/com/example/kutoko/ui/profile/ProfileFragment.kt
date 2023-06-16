@@ -51,7 +51,7 @@ class ProfileFragment : Fragment() {
 
 
         binding.btOpenStore.setOnClickListener {
-            val url = "https://www.example.com"
+            val url = "https://kutoko.id/"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
