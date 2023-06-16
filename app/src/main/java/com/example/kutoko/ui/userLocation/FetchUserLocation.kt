@@ -166,7 +166,4 @@ class FetchUserLocation : AppCompatActivity(){
             LocationManager.isGranted = false
         }
     }
-
-
-
 }

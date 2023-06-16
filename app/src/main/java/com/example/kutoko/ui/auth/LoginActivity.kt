@@ -14,13 +14,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.example.kutoko.clientApi.ApiConfig
+import com.example.kutoko.data.MyStoreResponse
 import com.example.kutoko.data.apiResponse.LoginResponse
 import com.example.kutoko.data.User
 import com.example.kutoko.data.UserPreference
 import com.example.kutoko.databinding.ActivityLoginBinding
 import com.example.kutoko.ui.userLocation.FetchUserLocation
 import com.example.kutoko.util.TokenManager
+import com.google.android.gms.common.api.Api
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
@@ -61,8 +64,9 @@ class LoginActivity : AppCompatActivity() {
         if (mUserPreference.getUser().token.toString().isNotEmpty()){
 
             TokenManager.token = mUserPreference.getUser().token.toString()
-            startActivity(Intent(this,FetchUserLocation::class.java))
+            startActivity(Intent(this@LoginActivity,FetchUserLocation::class.java))
             finish()
+
         }
 
         binding.tvRegisterNow.setOnClickListener{

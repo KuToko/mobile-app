@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kutoko.R
+import com.example.kutoko.data.Favorite
 import com.example.kutoko.data.apiResponse.DataSearchItem
 import com.example.kutoko.databinding.MenuItemBinding
 import com.example.kutoko.ui.detailstore.DetailStoreActivity
@@ -35,6 +36,18 @@ class SearchStoreAdapter(private val listProduct: List<DataSearchItem>) : Recycl
 
         holder.itemView.setOnClickListener {
             val moveIntent = Intent(holder.itemView.context, DetailStoreActivity::class.java)
+            moveIntent.putExtra("idToko", listProduct[position].id )
+            val idStore = listProduct[position].id
+            val storeName = listProduct[position].name
+            val upVotes = listProduct[position].upvotes
+            val avatar = listProduct[position].avatar
+            val kategori = listProduct[position].categories?.get(0)?.name
+
+            if (idStore != null && storeName != null && upVotes != null && avatar != null && kategori != null){
+                val favorite = Favorite(idStore,storeName,upVotes,avatar,kategori)
+                moveIntent.putExtra(DetailStoreActivity.STORE_PROFILE,
+                    favorite)
+            }
             moveIntent.putExtra("idToko", listProduct[position].id )
             holder.itemView.context.startActivity(moveIntent)
         }

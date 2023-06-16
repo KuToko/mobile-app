@@ -1,6 +1,7 @@
 package com.example.kutoko.ui.profile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,12 @@ class ProfileFragment : Fragment() {
         binding.tvProfileUser.text = user.name
         Glide.with(requireActivity()).load(user.avatar).placeholder(R.drawable.ic_baseline_image_24).into(binding.ivProfileUser)
 
+
+        binding.btOpenStore.setOnClickListener {
+            val url = "https://www.example.com"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
 
         binding.logout.setOnClickListener{
             val builder = AlertDialog.Builder(requireActivity())

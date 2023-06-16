@@ -46,8 +46,8 @@ class BerandaFragment : Fragment() {
             ViewModelProvider(this)[BerandaViewModel::class.java]
         _binding = FragmentBerandaBinding.inflate(inflater, container, false)
         binding.tvAlamatSekarang.text = LocationManager.addressLocation
-        //recylerview
 
+        // recyler view rekomendasi
         recomendRecylerView = binding.rvRekomendasi
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false).apply {
             reverseLayout = false
@@ -55,11 +55,13 @@ class BerandaFragment : Fragment() {
         }
         recomendRecylerView.layoutManager = layoutManager
         setUserRecomendationWithDelay()
-//        setUserRecomendation()
 
+        // recyler view toko terdekat
         nearbyRecylerView = binding.rvUmkmDisekitar
         nearbyRecylerView.layoutManager = GridLayoutManager(context,2)
         setUserStoreWithDelay()
+
+
         binding.btGantiLokasi.setOnClickListener {
             startActivity(Intent(requireActivity(),LocationList::class.java))
             requireActivity().finish()

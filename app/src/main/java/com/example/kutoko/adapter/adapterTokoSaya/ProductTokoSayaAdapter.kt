@@ -56,7 +56,6 @@ class ProductTokoSayaAdapter(private val listProduct: List<DataItem>) : Recycler
             }
 
         }
-
     }
 
     override fun getItemCount(): Int = listProduct.size
