@@ -5,5 +5,5 @@ This app have feature to add location for user see the umkm in that specific loc
 
 # LOGO
 
-
+![alt text]([http://url/to/img.png](https://github.com/KuToko/mobile-app/blob/master/icon.png)https://github.com/KuToko/mobile-app/blob/master/icon.png)
 
