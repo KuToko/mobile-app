@@ -36,6 +36,13 @@
         android:theme="@style/Theme.KuToko"
         tools:targetApi="31">
         <activity
+            android:name=".ui.tokosaya.delete.DeleteProductActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.tokosaya.update.UpdateProductActivity"
             android:exported="false">
             <meta-data
@@ -87,7 +94,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDy_mPtSZAvAl3yV_JcqqW1j7-GP0BqkrY" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

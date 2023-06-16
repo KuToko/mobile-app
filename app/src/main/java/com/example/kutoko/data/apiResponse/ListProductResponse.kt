@@ -1,6 +1,8 @@
 package com.example.kutoko.data.apiResponse
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ListProductResponse(
 
@@ -81,4 +83,29 @@ data class ProductResponse(
 
 )
 
+
+data class UpdateProductResponse(
+	@field:SerializedName("message")
+	val message: String,
+	@field:SerializedName("data")
+	val data: List<ProductResponse>
+)
+
+data class DeleteProductResponse(
+	@field:SerializedName("error")
+	val error: Boolean,
+
+	@field:SerializedName("message")
+	val message: String
+)
+
+@Parcelize
+data class ProductItem(
+	val id_bisnis: String,
+	val id:String,
+	val name:String,
+	val price: String,
+	val description: String,
+	val productImage: String? = null
+) : Parcelable
 

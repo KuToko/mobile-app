@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -39,7 +40,6 @@ class UploadProductActivity : AppCompatActivity() {
 
     private var getFile: File? = null
 
-    private val resultIntent = Intent()
 
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -61,9 +61,7 @@ class UploadProductActivity : AppCompatActivity() {
     }
 
     companion object{
-        private val REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA)
         const val BUSINESS_ID = "BUSINESS_ID"
-        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 
 
@@ -74,8 +72,6 @@ class UploadProductActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val id = intent.getStringExtra(BUSINESS_ID)
-
-        @Suppress("DEPRECATION")
         binding.btUnggahFoto.setOnClickListener {
             startGallery()
         }
@@ -83,7 +79,7 @@ class UploadProductActivity : AppCompatActivity() {
         binding.btUpload.setOnClickListener {
             showLoading(true)
             if (id != null){
-                Toast.makeText(this,"${id} toko",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this,"$id toko",Toast.LENGTH_SHORT).show()
                 uploadProduct(id)
             }else{
                 showLoading(false)
@@ -91,6 +87,13 @@ class UploadProductActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(MainActivity.CHANGE_NAV, true)
+        startActivity(intent)
+        finish()
     }
 
 
@@ -117,27 +120,38 @@ class UploadProductActivity : AppCompatActivity() {
             return
         }
 
+        val map : MutableMap<String,RequestBody> = mutableMapOf()
+
+
         val apiService = ApiConfig.getApiService()
         val file = reduceFileImage(getFile as File)
+        val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.extension)
+        Toast.makeText(this@UploadProductActivity, "$mimeType ", Toast.LENGTH_SHORT).show()
 
-        val requestImageFile = file.asRequestBody("image/*".toMediaType())
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
 
         val imageMultipart : MultipartBody.Part = MultipartBody.Part.createFormData(
-            "photoProduct",
-            file.name,
+            "product_image",
+            "foto",
             requestImageFile
         )
 
 
+//        val price = createPartFromString(binding.tieProductPrice.text.toString())
         val price = createPartFromString(binding.tieProductPrice.text.toString())
         val name = createPartFromString(binding.tieProductName.text.toString())
         val id = createPartFromString(idBisnis)
         val description = createPartFromString(binding.tieProductDesc.text.toString())
 
+        map["name"] = name
+        map["business_id"] = id
+        map["price"] = price
+        map["description"] = description
+
 
         val token = "Bearer " + TokenManager.token
 
-        val uploadProductRequest = apiService.uploadProduct(token,imageMultipart,id,name,price,description)
+        val uploadProductRequest = apiService.uploadProduct(token,map,imageMultipart)
         uploadProductRequest.enqueue(object : Callback<UploadProductResponse>{
             override fun onResponse(
                 call: Call<UploadProductResponse>,
@@ -164,6 +178,10 @@ class UploadProductActivity : AppCompatActivity() {
                 }else{
                     showLoading(false)
                     Toast.makeText(this@UploadProductActivity, "${response.message()} else 1 error code : ${response.code()} ${response.errorBody()} ${response.headers()}", Toast.LENGTH_SHORT).show()
+                    Log.d("error 1", response.errorBody().toString())
+                    Log.d("error 2", "${response.headers()}")
+                    Log.d("error 3", "${response.raw()}")
+                    Log.d("error 4", "${response.raw().headers}")
                 }
             }
 

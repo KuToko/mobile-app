@@ -25,6 +25,7 @@ class ListProductAdapter(private val listProduct: List<DataItem>) : RecyclerView
         holder.name.text = listProduct[position].name
         holder.desc.text = listProduct[position].description
         holder.price.text = "Rp. ${listProduct[position].price}"
+
     }
 
     override fun getItemCount() = listProduct.size

@@ -12,7 +12,7 @@ class RecomendationRepository(private val recomendationDatabase: RecomendationDa
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 10
+                pageSize = 3
             ),
             remoteMediator = RecomendationRemoteMediator(recomendationDatabase,apiService),
             pagingSourceFactory = {

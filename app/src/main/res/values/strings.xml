@@ -75,6 +75,8 @@
     <string name="foto_produk">Foto Produk</string>
     <string name="upload_image">unggah foto</string>
     <string name="input_harga">Harga Produk</string>
+    <string name="update_produk">Update Produk</string>
+    <string name="delete_produk">Delete Produk</string>
 
 
 </resources>

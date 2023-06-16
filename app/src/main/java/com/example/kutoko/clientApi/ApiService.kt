@@ -70,26 +70,32 @@ interface ApiService {
     @POST("products")
     fun uploadProduct(
         @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part,
-        @Part("business_id") business_id : RequestBody,
-        @Part("name") name : RequestBody,
-        @Part("price") price : RequestBody,
-        @Part("description") description: RequestBody
+        @PartMap partMap : MutableMap<String, RequestBody>,
+        @Part file: MultipartBody.Part
     ) : Call<UploadProductResponse>
 
-//    @Multipart
-//    @POST("products")
-//    fun uploadProduct(
-//        @Header("Authorization") token: String,
-//        @PartMap() partMap : MutableMap<String, RequestBody>,
-//        @Part file: MultipartBody.Part
-//    ) : Call<UploadProductResponse>
 
+    @Multipart
+    @PATCH("products/{id}")
+    fun updateProduct(
+        @Header("Authorization") token: String,
+        @Path("id") productId: String,
+        @PartMap partMap : MutableMap<String, RequestBody>,
+        @Part file: MultipartBody.Part
+    ) : Call<UpdateProductResponse>
+
+
+    @DELETE("products/{id}")
+    fun deleteProduct(
+        @Header("Authorization") token: String,
+        @Path("id") productId: String
+    ):Call<DeleteProductResponse>
 
     @GET("businesses/my/business")
     fun getMyStore(
         @Header("Authorization") token: String?
     ) : Call<MyStoreResponse>
+
 
 
     //votes

@@ -79,7 +79,18 @@ class MainActivity : AppCompatActivity() {
                 val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
                 if (currentFragment is BerandaFragment) {
                     finishAffinity()
-                } else {
+                } else if (check) {
+                    if (currentFragment is BerandaTokoSaya){
+                        val intent = Intent(this@MainActivity,MainActivity::class.java)
+                        intent.putExtra(CHANGE_NAV,false)
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        isEnabled = false
+                        onBackPressed()
+                    }
+                }
+                else {
                     isEnabled = false
                     onBackPressed()
                 }
